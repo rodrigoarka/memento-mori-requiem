@@ -1,11 +1,11 @@
 # Memento Mori: Réquiem — Sistema Foundry VTT
 
-**Versão do sistema: 0.8.1 — Baseado no Manual Básico de Regras v0.8.**
-**Plataforma alvo: Foundry Virtual Tabletop v14.**
+**Versão do sistema: 0.8.2 — Baseado no Manual Básico de Regras v0.8.**
+**Plataforma alvo: Foundry Virtual Tabletop v13.348 e v14.**
 
 ## Instalação por URL — Disponível
 
-No Foundry VTT 14, abra **Configuração → Sistemas de Jogo → Instalar Sistema** e cole:
+No Foundry VTT 13.348 ou 14, abra **Configuração → Sistemas de Jogo → Instalar Sistema** e cole:
 
 ```text
 https://raw.githubusercontent.com/rodrigoarka/memento-mori-requiem/main/system.json
@@ -71,14 +71,14 @@ Aptidão, Assinatura, Âncora, Lei, Verso, Correspondência, Condição, Vestíg
 
 ## Compatibilidade e testes
 
-O código segue o modelo atual `TypeDataModel` e as fichas `ApplicationV2`, usando os tipos declarados em `system.json`, conforme documentação oficial do Foundry v14. Foram efetuados testes estáticos e testes de regras independentes do Foundry. **A execução em um servidor real do Foundry não foi verificada neste ambiente**; faça um teste local antes de usá-lo em campanha e crie backup dos Mundos existentes.
+O código usa os modelos `TypeDataModel` e fichas `ApplicationV2`, presentes no Foundry v13.348 e v14. A inicialização v13 foi simulada em testes, mas ainda não foi executada em instalação real. Foram efetuados testes estáticos, testes de regras independentes do Foundry e simulações do registro de tipos, fichas e configurações na API v13. **A execução em um servidor real do Foundry não foi verificada neste ambiente**; faça um teste local antes de usá-lo em campanha e crie backup dos Mundos existentes.
 
 ## Estrutura
 
 ```
 memento-mori-requiem/
   system.json
-  module/{main,models,rules,services,dialogs,sheets,starter}.mjs
+  module/{compat,main,models,rules,services,dialogs,sheets,starter}.mjs
   templates/{actor,item,pressure,dashboard}.hbs
   styles/memento.css
   assets/logo.svg
