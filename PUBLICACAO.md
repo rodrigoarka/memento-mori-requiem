@@ -1,48 +1,32 @@
-# Publicação no GitHub
+# Publicação e atualização — Memento Mori: Réquiem
 
-Repositório previsto: `rodrigoarka/memento-mori-requiem`.
+## Situação atual
 
-## Procedimento sem terminal (conectado ao assistente)
+O sistema Foundry VTT v14 está publicado como **pré-lançamento v0.8.1**.
 
-1. Crie um repositório chamado `memento-mori-requiem` em https://github.com/new (escolha visibilidade pública; inicialize com README para criar a branch `main`; não escolha licença ou .gitignore).
-2. Garanta que a integração GitHub usada pelo ChatGPT tenha acesso ao repositório recém-criado.
-3. Retorne à conversa e peça para enviar os arquivos. Depois disso, a publicação pode ser feita no repositório criado.
-4. A primeira release `v0.8.1` deve ser criada por push da tag correspondente.
+- Repositório: https://github.com/rodrigoarka/memento-mori-requiem
+- Release: https://github.com/rodrigoarka/memento-mori-requiem/releases/tag/v0.8.1
+- Manifesto (URL fixa para instalação e atualizações): https://raw.githubusercontent.com/rodrigoarka/memento-mori-requiem/main/system.json
+- ZIP instalável v0.8.1: https://github.com/rodrigoarka/memento-mori-requiem/releases/download/v0.8.1/memento-mori-requiem.zip
 
-## Procedimento local com Git/GitHub CLI
+## Como publicar novas versões
 
-Extraia `Memento_Mori_Requiem_GitHub_ready_v0_8_1.zip` em uma pasta e, dentro dela:
+A automação está configurada em `.github/workflows/publish.yml`.
 
-```bash
-git init -b main
-git add .
-git commit -m "feat: sistema Foundry Memento Mori Requiem v0.8.1"
-gh auth login
-gh repo create rodrigoarka/memento-mori-requiem --public --source . --remote origin --push
-git tag v0.8.1
-git push origin v0.8.1
-```
+1. Atualize `version` em `system.json` e em `package.json`, por exemplo `0.8.2`.
+2. Atualize a propriedade `download` no `system.json` para terminar em `/releases/download/v0.8.2/memento-mori-requiem.zip`.
+3. Atualize `CHANGELOG.md` e as regras/código relevantes.
+4. Envie as alterações para a branch `main`.
+5. O GitHub Actions roda a verificação de sintaxe e os nove testes, verifica o manifesto, empacota os arquivos e cria a Release e tag `v0.8.2` com `memento-mori-requiem.zip` e `system.json`. Se a Release dessa versão já existir, a automação preserva os artefatos existentes.
 
-A ação de release roda automaticamente após a tag ser enviada (GitHub Actions precisa estar habilitado).
+Acompanhe a automação em https://github.com/rodrigoarka/memento-mori-requiem/actions.
 
-## Links que ficarão válidos após a primeira release
+## Primeira instalação
 
-- Código: https://github.com/rodrigoarka/memento-mori-requiem
-- Manifesto Foundry: https://raw.githubusercontent.com/rodrigoarka/memento-mori-requiem/main/system.json
-- Download do ZIP instalado pelo Foundry: https://github.com/rodrigoarka/memento-mori-requiem/releases/download/v0.8.1/memento-mori-requiem.zip
+No Foundry VTT 14, em Sistemas de Jogo > Instalar Sistema, cole o endereço do manifesto acima. Depois crie um Mundo com Memento Mori: Réquiem.
 
-Os links acima **ainda não estão publicados** até que o repositório seja criado e a primeira release termine.
-
-## Próxima versão
-
-1. Alterar `version` em `system.json` e `package.json`.
-2. Atualizar `download` de `system.json` para `/releases/download/vNOVA_VERSAO/memento-mori-requiem.zip`.
-3. Atualizar `CHANGELOG.md`.
-4. Commit em `main`.
-5. Criar e enviar tag `vNOVA_VERSAO`.
-
-O endereço do manifesto permanece estável para verificações de atualização no Foundry.
+**Limitação atual:** testes automatizados concluídos, mas o sistema ainda não foi validado em uma instalação real do Foundry. Recomenda-se testar em um Mundo novo.
 
 ## Licenciamento
 
-Nenhuma licença open source foi escolhida; publicar o código publicamente não concede automaticamente uma licença de reutilização. Decida o licenciamento antes de receber contribuições externas.
+Nenhuma licença de uso de código aberto foi selecionada. Um repositório público permite visualização do código, mas não significa permissão automática de redistribuição ou modificação.
