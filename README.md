@@ -3,7 +3,7 @@
 **Versão do sistema: 0.8.1 — Baseado no Manual Básico de Regras v0.8.**
 **Plataforma alvo: Foundry Virtual Tabletop v14.**
 
-## Instalação por URL (após publicação no GitHub)
+## Instalação por URL — Disponível
 
 No Foundry VTT 14, abra **Configuração → Sistemas de Jogo → Instalar Sistema** e cole:
 
@@ -11,7 +11,7 @@ No Foundry VTT 14, abra **Configuração → Sistemas de Jogo → Instalar Siste
 https://raw.githubusercontent.com/rodrigoarka/memento-mori-requiem/main/system.json
 ```
 
-Essa URL só estará disponível quando o repositório `rodrigoarka/memento-mori-requiem` existir e a primeira **Release v0.8.1** tiver sido publicada. Até lá, utilize a instalação manual abaixo.
+A **Release v0.8.1** está publicada e pode ser instalada com esse manifesto. O pacote é um pré-lançamento para playtest. [Ver release](https://github.com/rodrigoarka/memento-mori-requiem/releases/tag/v0.8.1).
 
 Atualizações futuras usarão o mesmo manifesto estável. As instruções de publicação estão em `PUBLICACAO.md`.
 
@@ -25,7 +25,7 @@ Atualizações futuras usarão o mesmo manifesto estável. As instruções de pu
 
 Alternativa para o Narrador, com o Mundo aberto: Console do Foundry → `game.memento.openPanel()`.
 
-> **Importante:** a distribuição local serve para instalação manual. O manifesto online depende do GitHub e da Release. O pacote não contém Foundry VTT, mapas comerciais ou a licença do aplicativo Foundry.
+> **Importante:** o pacote não contém o aplicativo Foundry VTT, mapas comerciais nem a licença da plataforma. O código passou nos testes automatizados; ainda falta validar a experiência integral dentro de uma instalação real do Foundry.
 
 ## O que foi implementado
 
