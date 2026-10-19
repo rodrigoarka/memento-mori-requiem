@@ -1,4 +1,4 @@
-/** Foundry v14 TypeDataModels: nenhum template.json legado. */
+/** Foundry v13.348/v14 TypeDataModels: nenhum template.json legado. */
 const F = foundry.data.fields;
 const s = (initial = "") => new F.StringField({ required: true, blank: true, initial });
 const n = (initial = 0, max = 9999) => new F.NumberField({ required: true, integer: true, min: 0, max, initial });
