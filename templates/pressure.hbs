@@ -1,0 +1,7 @@
+<h2>Pressão · {{system.pressure}} / 4</h2>
+<div class="mm-track pressure">{{#each (track 4 system.pressure)}}<span class="{{#if this}}filled{{/if}}"></span>{{/each}}</div>
+<div class="mm-buttons"><button type="button" data-action="increasePressure" data-delta="-1">− Pressão</button><button type="button" data-action="increasePressure" data-delta="1">+ Pressão</button></div>
+<label>1 · Primeiro sinal<input name="system.pressure1" value="{{system.pressure1}}"></label>
+<label>2 · Restrição<input name="system.pressure2" value="{{system.pressure2}}"></label>
+<label>3 · Alternativas se estreitam<input name="system.pressure3" value="{{system.pressure3}}"></label>
+<label>4 · Consequência acontece<input name="system.pressure4" value="{{system.pressure4}}"></label>

@@ -1,0 +1,11 @@
+{
+  "name": "memento-mori-requiem-foundry",
+  "version": "0.8.1",
+  "private": true,
+  "type": "module",
+  "description": "Sistema Memento Mori: Réquiem para Foundry VTT v14",
+  "scripts": {
+    "test": "node --test tests/*.test.mjs",
+    "check": "node --check module/main.mjs && node --check module/models.mjs && node --check module/rules.mjs && node --check module/services.mjs && node --check module/dialogs.mjs && node --check module/sheets.mjs && node --check module/starter.mjs"
+  }
+}

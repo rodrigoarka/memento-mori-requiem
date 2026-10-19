@@ -1,0 +1,74 @@
+/* Memento Mori: Réquiem — claro, azul-pálido, nanquim e dourado fosco. */
+.memento-mori { --mm-ink:#1d2b37; --mm-blue:#e9f3f7; --mm-paper:#fcfeff; --mm-gold:#b08b50; --mm-rule:#bfced6; --mm-muted:#596d7c; color:var(--mm-ink); font-family:Georgia,'Times New Roman',serif; }
+.memento-mori.window-app { background:var(--mm-paper); }
+.memento-mori .window-content{padding:0;background:var(--mm-paper);}
+.memento-mori .mm-app{min-height:100%;padding:16px 20px 20px;background:linear-gradient(150deg,#ffffff,#f6fbfe 66%,#edf7fb);font-size:14px;line-height:1.45;}
+.memento-mori .mm-sheet-head{display:flex;gap:16px;align-items:center;justify-content:space-between;border-bottom:2px double var(--mm-gold);padding:5px 0 15px;flex-wrap:wrap;}
+.memento-mori .mm-brand{display:flex;flex-direction:column;gap:0;width:225px;flex:0 0 225px;}
+.memento-mori .mm-brand img{display:block;width:190px;max-height:88px;object-fit:contain;object-position:left center;}
+.memento-mori .mm-brand>b{font-family:Georgia,serif;letter-spacing:.12em;font-size:16px;}
+.memento-mori .mm-brand span{color:var(--mm-muted);font-style:italic;font-size:11px;}
+.memento-mori .mm-identity{flex:1;min-width:220px;}
+.memento-mori .mm-identity label,.memento-mori label{display:block;font-size:12px;letter-spacing:.015em;font-weight:bold;color:var(--mm-muted);}
+.memento-mori .mm-identity input{font-size:23px;font-weight:bold;line-height:1.3;}
+.memento-mori .mm-subtitle{margin-top:5px;color:var(--mm-muted);font-size:11px;text-transform:capitalize;}
+.memento-mori .mm-head-actions{display:flex;gap:7px;align-items:center;}
+.memento-mori button,.memento-mori .mm-buttons button{border:1px solid #abc0cc;border-radius:5px;background:#fff;color:var(--mm-ink);padding:6px 11px;min-height:28px;font-family:inherit;font-size:12px;cursor:pointer;box-shadow:none;line-height:1.3;}
+.memento-mori button:hover{background:#e5f1f6;border-color:#6d94ac;box-shadow:0 0 0 1px #a4bdcb inset;}
+.memento-mori button:disabled{opacity:.48;cursor:default;}
+.memento-mori button.gold{background:#1c2d3a;color:#f7e7c4;border-color:#b08b50;}
+.memento-mori button.gold:hover{background:#314557;}
+.memento-mori .mm-tabs{display:flex;gap:4px;border-bottom:1px solid var(--mm-rule);margin:12px 0 17px;}
+.memento-mori .mm-tabs button{border:0;border-radius:6px 6px 0 0;background:transparent;padding:9px 16px;font-size:13px;}
+.memento-mori .mm-tabs button.active{background:#e7f2f8;border-bottom:3px solid var(--mm-gold);font-weight:bold;}
+.memento-mori .mm-columns{display:grid;grid-template-columns:1fr 1fr;gap:17px;align-items:start;}
+.memento-mori .mm-panel{border:1px solid var(--mm-rule);border-radius:7px;background:rgba(255,255,255,.85);padding:14px 16px;min-width:0;}
+.memento-mori h2{font-family:Georgia,serif;text-transform:uppercase;letter-spacing:.12em;font-weight:normal;font-size:14px;color:var(--mm-ink);border-bottom:1px solid #d5e0e4;padding:0 0 7px;margin:9px 0 9px;display:flex;align-items:center;justify-content:space-between;}
+.memento-mori h2:first-child{margin-top:0;}
+.memento-mori h3{color:var(--mm-ink);font-size:15px;font-weight:bold;}
+.memento-mori .mm-hint,.memento-mori .mm-empty{color:var(--mm-muted);font-style:italic;font-size:12px;margin:5px 0 12px;}
+.memento-mori input:not([type=checkbox]),.memento-mori textarea,.memento-mori select{display:block;width:100%;height:auto;min-height:30px;border:1px solid #cedbe3;border-radius:4px;background:#fff;color:#182632;font-family:Georgia,serif;font-size:13px;padding:7px 8px;box-shadow:none;}
+.memento-mori textarea{resize:vertical;min-height:68px;}
+.memento-mori .mm-panel>label{margin:8px 0;}
+.memento-mori .mm-panel label:has(textarea)>textarea,.memento-mori .mm-panel label>input{margin-top:3px;}
+.memento-mori input[type=checkbox]{width:15px;height:15px;margin-right:5px;vertical-align:middle;}
+.memento-mori .mm-abilities{display:grid;gap:7px;}
+.memento-mori .mm-abilities label{display:grid;grid-template-columns:1fr 2fr 56px;align-items:center;gap:7px;color:var(--mm-ink);}
+.memento-mori .mm-abilities label small{color:var(--mm-muted);font-weight:normal;letter-spacing:0;}
+.memento-mori .mm-abilities input{width:53px !important;text-align:center !important;font-size:19px !important;}
+.memento-mori .mm-entry,.memento-mori .mm-anchor{display:flex;align-items:center;justify-content:space-between;gap:9px;margin:5px 0;padding:7px 8px;border-left:2px solid #b3cbd8;background:#f2f7fa;border-radius:3px;}
+.memento-mori .mm-entry>div:first-child,.memento-mori .mm-anchor>div:first-child{min-width:0;flex:1;}
+.memento-mori .mm-entry small,.memento-mori .mm-anchor small{display:block;font-size:11px;color:var(--mm-muted);font-weight:normal;white-space:normal;}
+.memento-mori .mm-entry button{font-size:11px;padding:4px 7px;}
+.memento-mori .mm-add{font-size:11px;letter-spacing:0;text-transform:none;}
+.memento-mori .mm-anchor.broken{opacity:.65;border-left-color:#7f8c91;}
+.memento-mori .mm-count{float:right;font-size:16px;letter-spacing:0;color:var(--mm-gold);font-weight:bold;}
+.memento-mori .mm-track{display:flex;gap:7px;margin:13px 0;}
+.memento-mori .mm-track span{height:15px;flex:1;min-width:7px;border:1px solid #9eb5c2;border-radius:20px;background:#fff;}
+.memento-mori .mm-track span.filled{background:#6a97b0;border-color:#416a81;}
+.memento-mori .mm-track.mourning span.filled{background:#2c3a47;border-color:#111f28;}
+.memento-mori .mm-track.pressure span.filled{background:#b08b50;border-color:#8b6c3a;}
+.memento-mori .mm-buttons{display:flex;flex-wrap:wrap;gap:5px;margin:8px 0;}
+.memento-mori .mm-warning,.memento-mori .mm-danger{border:1px solid #b8c7cb;background:#f4f7f8;border-left:4px solid var(--mm-gold);padding:10px 12px;margin:12px 0;border-radius:3px;}
+.memento-mori .mm-danger{border-left-color:#873b3b;background:#fff4f4;}
+.memento-mori .mm-item-app .mm-sheet-head{display:flex;}
+.memento-mori .mm-item-app .mm-brand{width:230px;flex:0 0 230px;}
+.memento-mori .mm-item-app .mm-sheet-head label{flex:1;min-width:180px;}
+.memento-mori .mm-item-grid>label{margin-bottom:12px;}
+.mm-chat{font-family:Georgia,serif;color:#1d2b37;padding:9px 12px;background:#faffff;border:1px solid #b8cad3;border-left:3px solid #b08b50;border-radius:4px;}
+.mm-chat header{border-bottom:1px solid #c9d9df;padding-bottom:5px;margin-bottom:8px;}
+.mm-chat header b{font-size:10px;letter-spacing:.11em;color:#637885;}
+.mm-chat h3{margin:3px 0 1px;font-family:Georgia,serif;font-size:18px;}
+.mm-chat .mm-coin-row{display:flex;gap:12px;margin:10px 0;justify-content:center;}
+.mm-coin{height:56px;width:64px;border:2px solid #b08b50;border-radius:50%;display:flex;flex-direction:column;align-items:center;justify-content:center;font-size:26px;line-height:1;}
+.mm-coin small{font-size:10px;color:#33495c;margin-top:3px;}
+.mm-coin.awake{background:#e9f2f6;color:#173c56;}
+.mm-coin.silent{background:#f5f5f5;color:#8799a2;border-color:#c4c9cc;}
+.mm-dialog-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;}
+.mm-dialog-grid label{display:block;font-weight:bold;}
+.mm-dialog-grid label.mm-wide{grid-column:1/-1;}
+.mm-dialog-grid input:not([type=checkbox]),.mm-dialog-grid select,.mm-field textarea,.mm-field select{width:100%;padding:6px;margin-top:3px;color:#1f2a36;background:#fff;}
+.mm-field{display:block;min-width:270px;}
+.memento-mori.mm-dashboard .mm-dash-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;}
+.memento-mori.mm-dashboard .mm-dash-grid button{padding:16px 8px;min-height:70px;}
+@media(max-width:790px){.memento-mori .mm-columns{grid-template-columns:1fr;}.memento-mori .mm-app{padding:12px;}.memento-mori .mm-tabs{overflow-x:auto;}.memento-mori .mm-brand{flex:0 0 170px;width:170px;}.memento-mori .mm-brand img{width:160px;}.mm-dialog-grid{grid-template-columns:1fr;}}
