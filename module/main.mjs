@@ -1,4 +1,5 @@
 import { SYS, chapter, scene, note, escapeHTML } from './services.mjs';
+import { supportedGeneration, loadSheetPartials } from './compat.mjs';
 import { MMActorSheet, MMItemSheet } from './sheets.mjs';
 import { RetornadoData, ConfluenciaData, EntidadeData, DominioData, FissuraData, MementoItemData } from './models.mjs';
 import { dialogWill, dialogResonance } from './dialogs.mjs';
@@ -18,6 +19,7 @@ export class MementoDashboard extends BaseDashboard {
 }
 
 Hooks.once('init',async()=>{
+  supportedGeneration();
   CONFIG.Actor.dataModels.retornado=RetornadoData;
   CONFIG.Actor.dataModels.confluencia=ConfluenciaData;
   CONFIG.Actor.dataModels.entidade=EntidadeData;
@@ -32,7 +34,7 @@ Hooks.once('init',async()=>{
   game.settings.registerMenu(SYS,'narrador',{name:'Painel Memento Mori',label:'Abrir painel',hint:'Vontade, moedas, capítulos e conteúdo inicial.',icon:'fa-solid fa-moon',type:MementoDashboard,restricted:true});
   Handlebars.registerHelper('eq',(a,b)=>a===b);
   Handlebars.registerHelper('track',(size,current)=>Array.from({length:Number(size)||0},(_,i)=>i<Number(current)));
-  await foundry.applications.handlebars.loadTemplates([`systems/${SYS}/templates/pressure.hbs`]);
+  await loadSheetPartials([`systems/${SYS}/templates/pressure.hbs`]);
 });
 Hooks.once('ready',()=>{
   game.memento={openPanel:()=>new MementoDashboard().render(true),will:()=>dialogWill(),voices:()=>dialogResonance(),chapter,scene,installStarterContent};
