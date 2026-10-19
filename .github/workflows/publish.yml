@@ -1,0 +1,62 @@
+name: Publicar Memento Mori no Foundry
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: release-memento-mori
+  cancel-in-progress: false
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Obter código
+        uses: actions/checkout@v4
+      - name: Preparar Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Validar sistema
+        run: |
+          npm run check
+          npm test
+      - name: Validar manifesto, versão e arquivos
+        shell: bash
+        run: |
+          node --input-type=module <<'NODE'
+          import fs from "node:fs";
+          const m = JSON.parse(fs.readFileSync("system.json", "utf8"));
+          if (m.id !== "memento-mori-requiem") throw new Error("ID do sistema inválido");
+          const tag = "v" + m.version;
+          if (!/^v\d+\.\d+\.\d+$/.test(tag)) throw new Error("Versão inválida");
+          if (m.download !== `https://github.com/${process.env.GITHUB_REPOSITORY}/releases/download/${tag}/memento-mori-requiem.zip`) throw new Error("URL de download difere da versão/repositório");
+          const files = ["module/main.mjs", "styles/memento.css", "templates/actor.hbs", "assets/logo.svg", "lang/pt-BR.json", "docs/manual-v0.8.pdf"];
+          for (const file of files) if (!fs.existsSync(file)) throw new Error("Arquivo ausente: " + file);
+          fs.appendFileSync(process.env.GITHUB_ENV, "RELEASE_TAG=" + tag + "\n");
+          NODE
+      - name: Empacotar distribuição
+        shell: bash
+        run: |
+          zip -q -r memento-mori-requiem.zip system.json module templates styles lang assets docs README.md
+          unzip -tqq memento-mori-requiem.zip
+          test "$(unzip -Z1 memento-mori-requiem.zip | grep -c '^system.json$')" -eq 1
+      - name: Publicar a versão de playtest, caso inédita
+        env:
+          GH_TOKEN: ${{ github.token }}
+        shell: bash
+        run: |
+          if gh release view "$RELEASE_TAG" >/dev/null 2>&1; then
+            echo "Release $RELEASE_TAG já publicada; preservando seus artefatos."
+            exit 0
+          fi
+          gh release create "$RELEASE_TAG" memento-mori-requiem.zip system.json \
+            --target "$GITHUB_SHA" \
+            --title "Memento Mori: Réquiem $RELEASE_TAG" \
+            --notes-file CHANGELOG.md \
+            --prerelease
