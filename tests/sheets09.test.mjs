@@ -33,3 +33,19 @@ test('fichas 0.9.1: entidades e domínio têm perguntas mínimas sem apagar dado
  assert.doesNotMatch(item,/name="system.reclaimed"/);
  assert.doesNotMatch(item,/name="system.effect">\{\{system.effect\}\}<\/textarea><\/label>\{\{\/if\}\}/);
 });
+
+test('fichas 0.9.2: Capacidades circulares, barra de Distância e Luto centralizado',()=>{
+ const tpl=read('templates/actor.hbs'), css=read('styles/memento.css'), sheet=read('module/sheets.mjs');
+ assert.match(tpl,/class="mm-distance-bar"/);
+ assert.match(tpl,/width:\{\{distancePercent\}\}%/);
+ assert.match(tpl,/class="mm-luto-dots"/);
+ assert.match(tpl,/class="mm-luto-dot/);
+ assert.doesNotMatch(tpl,/class="mm-track mourning"/);
+ assert.match(sheet,/distancePercent/);
+ assert.match(css,/\.mm-abilities input\[type=number\]/);
+ assert.match(css,/border-radius:50%!important/);
+ assert.match(css,/\.mm-luto-dots\{[^}]*justify-content:center/);
+ const item=read('templates/item.hbs');
+ assert.equal((item.match(/name="system.anchorType" value=/g)||[]).length,3);
+ assert.doesNotMatch(item,/<select name="system.anchorType">/);
+});
