@@ -21,6 +21,7 @@ export class MMActorSheet extends BaseActor {
     const c=await super._prepareContext(options);const a=this.actor;
     Object.assign(c,{
       actor:a,system:a.system,editable:this.isEditable,tab:this._mmTab,chapter:chapter(),scene:scene(),
+      distancePercent:a.type==='retornado'?Math.max(0,Math.min(100,Math.round(Number(a.system.distance||0)*100/6))):0,
       isRetornado:a.type==='retornado',isConfluencia:a.type==='confluencia',isEntidade:a.type==='entidade',isDominio:a.type==='dominio',isFissura:a.type==='fissura',
       aptidoes:a.items.filter(i=>i.type==='aptidao'),assinaturas:a.items.filter(i=>i.type==='assinatura'),ancoras:a.items.filter(i=>i.type==='ancora'),
       leis:a.items.filter(i=>i.type==='lei'),versos:a.items.filter(i=>i.type==='verso'),correspondencias:a.items.filter(i=>i.type==='correspondencia'),
