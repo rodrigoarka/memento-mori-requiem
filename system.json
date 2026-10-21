@@ -1,8 +1,8 @@
 {
   "id": "memento-mori-requiem",
   "title": "Memento Mori: Réquiem",
-  "description": "Sistema autoral de exploração metafísica. Manual 0.8; Três Vozes, Vontade, Distância, Luto, Âncoras, Confluência, Fissuras e domínios.",
-  "version": "0.8.2",
+  "description": "RPG de exploração metafísica sobre a Vontade, as Três Vozes, descobertas e o Reencontro. Edição de playtest 0.9.",
+  "version": "0.9.0",
   "compatibility": {
     "minimum": "13.348",
     "verified": "14",
@@ -55,5 +55,5 @@
   "socket": false,
   "url": "https://github.com/rodrigoarka/memento-mori-requiem",
   "manifest": "https://raw.githubusercontent.com/rodrigoarka/memento-mori-requiem/main/system.json",
-  "download": "https://github.com/rodrigoarka/memento-mori-requiem/releases/download/v0.8.2/memento-mori-requiem.zip"
+  "download": "https://github.com/rodrigoarka/memento-mori-requiem/releases/download/v0.9.0/memento-mori-requiem.zip"
 }
