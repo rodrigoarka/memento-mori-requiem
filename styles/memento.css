@@ -72,3 +72,10 @@
 .memento-mori.mm-dashboard .mm-dash-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;}
 .memento-mori.mm-dashboard .mm-dash-grid button{padding:16px 8px;min-height:70px;}
 @media(max-width:790px){.memento-mori .mm-columns{grid-template-columns:1fr;}.memento-mori .mm-app{padding:12px;}.memento-mori .mm-tabs{overflow-x:auto;}.memento-mori .mm-brand{flex:0 0 170px;width:170px;}.memento-mori .mm-brand img{width:160px;}.mm-dialog-grid{grid-template-columns:1fr;}}
+
+/* 0.9.1: campos avançados disponíveis sem dominar a ficha. */
+.memento-mori .mm-optional { border:1px solid #d1dee5; border-radius:7px; background:#f7fafc; padding:10px 12px; margin:12px 0; }
+.memento-mori .mm-optional>summary { cursor:pointer; font-size:13px; font-weight:bold; color:#42677e; padding:3px 0; }
+.memento-mori .mm-optional[open]>summary { margin-bottom:13px; }
+.memento-mori .mm-optional label { display:block; margin:10px 0; }
+.memento-mori .mm-optional h2 { margin-top:18px; }
