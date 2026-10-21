@@ -6,7 +6,7 @@ const voiceLabel={corpo:'Corpo',memoria:'Memória',veu:'Véu'};
 export const voiceNames = a => a.awake.length ? a.awake.map(v=>voiceLabel[v]).join(' + ') : 'Nenhuma';
 export const voiceFace = (faces,i) => `<span class="mm-coin ${faces[i]?'awake':'silent'}">${faces[i]?'●':'○'}<small>${['Corpo','Memória','Véu'][i]}</small></span>`;
 function resonanceHTML(result, intro = '', changed = '') {
-  return `<p>${h(intro)}</p><div class="mm-coin-row">${[0,1,2].map(i=>voiceFace(result.faces,i)).join('')}</div><p><strong>${h(result.label)}</strong> · ${h(voiceNames(result))}</p><p>${h(changed||'A manifestação respeita a Lei e o resultado da Vontade; não redefine sucesso ou fracasso.')}</p>`;
+  return `<p>${h(intro)}</p><div class="mm-coin-row">${[0,1,2].map(i=>voiceFace(result.faces,i)).join('')}</div><p><strong>${h(result.label)}</strong> · ${h(voiceNames(result))}</p><p>${h(changed||'A manifestação responde ao acontecimento. Ela não altera o resultado da Vontade.')}</p>`;
 }
 export async function dialogWill(defaultActor=null) {
   const chars=game.actors.filter(a=>a.type==='retornado' && (game.user.isGM||a.isOwner));
@@ -16,7 +16,7 @@ export async function dialogWill(defaultActor=null) {
      <label>Retornado<select name="actorId">${options(chars,defaultActor?.id||'')}</select></label>
      <label>Capacidade<select name="ability"><option value="lucidez">Lucidez</option><option value="pulso">Pulso</option><option value="elo">Elo</option><option value="firmeza">Firmeza</option></select></label>
      <label>Resistência<select name="resistance">${[0,1,2,3,4].map(n=>`<option value="${n}" ${n===2?'selected':''}>${n}</option>`).join('')}</select></label>
-     <label>Intenção<input name="intent" placeholder="O que pretende realizar?" required></label>
+     <label>Intenção e abordagem<input name="intent" placeholder="O que seu personagem faz e como?" required></label>
      <label><input name="preparation" type="checkbox"> Preparo justificado (+1)</label>
      <label><input name="knowledge" type="checkbox"> Conhecimento/Lei (+1)</label>
      <label><input name="condition" type="checkbox" checked> Condição necessária satisfeita</label>
