@@ -20,7 +20,7 @@ test('fichas 0.9.1: duas áreas para o Retornado, campos livres e sem duplicaç�
  assert.doesNotMatch(tpl,/Lei Interiorizada:\s*\{\{system.interiorLawId\}\}/);
  assert.doesNotMatch(tpl,/Reivindicadas:\s*<b>/);
  assert.doesNotMatch(tpl,/Âncora ameaçada:\s*<b>/);
- for(const x of ['ancoras','distancia','mourning','system.notes','isConfluencia','isEntidade','isDominio','isFissura']) assert.match(tpl,new RegExp(x));
+ for(const x of ['ancoras','system.distance','mourning','system.notes','isConfluencia','isEntidade','isDominio','isFissura']) assert.match(tpl,new RegExp(x));
 });
 test('fichas 0.9.1: entidades e domínio têm perguntas mínimas sem apagar dados',()=>{
  const tpl=read('templates/actor.hbs');
