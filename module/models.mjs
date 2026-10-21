@@ -19,7 +19,7 @@ export class ConfluenciaData extends foundry.abstract.TypeDataModel {
   static defineSchema() { return { commonVerse:s(), members:s(), notes:s(), usedChapter:n(0), lastTrail:s(), lawsKnown:s(), routes:s() }; }
 }
 export class EntidadeData extends foundry.abstract.TypeDataModel {
-  static defineSchema() { return { nature:s(), intention:s(), law:s(), limitation:s(), signs:s(), consequence:s(), pressure:n(0,4), pressure1:s(), pressure2:s(), pressure3:s(), pressure4:s(), notes:s() }; }
+  static defineSchema() { return { nature:s(), intention:s(), approaches:s(), law:s(), limitation:s(), signs:s(), consequence:s(), pressure:n(0,4), pressure1:s(), pressure2:s(), pressure3:s(), pressure4:s(), notes:s() }; }
 }
 export class DominioData extends foundry.abstract.TypeDataModel {
   static defineSchema() { return { appearance:s(), objective:s(), signals:s(), law:s(), exception:s(), cost:s(), opposition:s(), routes:s(), returnMark:s(), matrixBody:s(), matrixMemory:s(), matrixVeil:s(), pressure:n(0,4), pressure1:s(), pressure2:s(), pressure3:s(), pressure4:s(), notes:s() }; }
