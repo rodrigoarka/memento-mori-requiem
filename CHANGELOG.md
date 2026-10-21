@@ -1,5 +1,15 @@
 # Histórico de versões
 
+## 0.9.0 — Vontade, Reencontro e investigação ativa
+
+- Vontade reafirmada como mecânica central de resolução e Reencontro definido como objetivo estético, sem pontuação ou emoção obrigatória.
+- Estrofes agora registram uma hipótese e um experimento. Três Versos não liberam revelações automáticas.
+- Criador leve de entidades com campo opcional sobre como lidar com elas.
+- Interface das fichas com título tipográfico, preparando a identidade visual futura.
+- Guia rápido 0.9 independente da aventura A Segunda Lembrança.
+- Testes de regressão sobre a intenção, regras principais e ferramentas.
+- Mantém compatibilidade declarada com Foundry VTT 13.348 a 14. Testes reais de interface ainda pendentes.
+
 ## 0.8.2 — Compatibilidade com Foundry 13.348
 
 - Compatibilidade declarada com Foundry VTT **13.348–14**, preservando o Manual Básico v0.8.
