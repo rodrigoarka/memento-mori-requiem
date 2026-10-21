@@ -1,5 +1,15 @@
 # Histórico de versões
 
+## 0.9.2 — Controles visuais das fichas
+
+- Capacidades exibidas em campos numéricos circulares.
+- Distância exibida como barra contínua que se preenche de 0 a 6.
+- Luto representado por três círculos centralizados, preenchidos de preto conforme as perdas.
+- Tipo de Âncora passou a ser selecionado por controles circulares em vez de uma lista.
+- Os valores de sistema e a progressão foram preservados, sem alteração nas regras.
+- A ficha HTML independente 0.9.3 também utiliza estes elementos e gera PDF com círculos e barra.
+
+
 ## 0.9.1 — Fichas leves
 
 - Retornado: apenas Meu personagem e Minhas anotações, com capacidades, aptidões, assinatura, âncoras, Distância e Luto visíveis.
