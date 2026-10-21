@@ -1,6 +1,6 @@
 # Memento Mori: Réquiem — Sistema Foundry VTT
 
-**Versão do sistema: 0.8.2 — Baseado no Manual Básico de Regras v0.8.**
+**Versão do sistema: 0.9.0 — Baseado no Manual Básico de Regras v0.9.1 (playtest).**
 **Plataforma alvo: Foundry Virtual Tabletop v13.348 e v14.**
 
 ## Instalação por URL — Disponível
@@ -11,7 +11,7 @@ No Foundry VTT 13.348 ou 14, abra **Configuração → Sistemas de Jogo → Inst
 https://raw.githubusercontent.com/rodrigoarka/memento-mori-requiem/main/system.json
 ```
 
-A **Release v0.8.1** está publicada e pode ser instalada com esse manifesto. O pacote é um pré-lançamento para playtest. [Ver release](https://github.com/rodrigoarka/memento-mori-requiem/releases/tag/v0.8.1).
+A **Release v0.9.0** é a edição de desenvolvimento correspondente às regras 0.9. [Ver releases](https://github.com/rodrigoarka/memento-mori-requiem/releases).
 
 Atualizações futuras usarão o mesmo manifesto estável. As instruções de publicação estão em `PUBLICACAO.md`.
 
@@ -26,6 +26,14 @@ Atualizações futuras usarão o mesmo manifesto estável. As instruções de pu
 Alternativa para o Narrador, com o Mundo aberto: Console do Foundry → `game.memento.openPanel()`.
 
 > **Importante:** o pacote não contém o aplicativo Foundry VTT, mapas comerciais nem a licença da plataforma. O código passou nos testes automatizados; ainda falta validar a experiência integral dentro de uma instalação real do Foundry.
+
+## Direção de design 0.9
+
+**A Vontade** resolve ações quando há uma resistência significativa. O jogador descreve sua intenção e abordagem antes de consultar valores. **O Reencontro** é a intenção estética: descobertas podem mudar o significado de um vínculo, uma lembrança ou uma escolha. Não é uma regra de pontos ou uma conclusão obrigatória.
+
+O painel abre **`docs/guia-rapido-v0.9.html`**, uma referência atualizada com as regras centrais. O PDF em `docs/manual-v0.8.pdf` permanece no repositório apenas como arquivo histórico. O Manual Básico 0.9.1 completo está sendo distribuído separadamente durante o playtest e ainda precisa ser incorporado ao repositório.
+
+*A Segunda Lembrança* é conteúdo opcional. O Limiar não está limitado à estação ou aos personagens dos exemplos.
 
 ## O que foi implementado
 
