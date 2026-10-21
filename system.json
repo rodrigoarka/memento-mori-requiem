@@ -1,8 +1,8 @@
 {
   "id": "memento-mori-requiem",
   "title": "Memento Mori: Réquiem",
-  "description": "RPG de exploração metafísica sobre a Vontade, as Três Vozes, descobertas e o Reencontro. Edição de playtest 0.9.",
-  "version": "0.9.0",
+  "description": "Memento Mori: Réquiem — regras 0.9, fichas leves e anotações livres. Playtest para Foundry v13.348–14.",
+  "version": "0.9.1",
   "compatibility": {
     "minimum": "13.348",
     "verified": "14",
@@ -55,5 +55,5 @@
   "socket": false,
   "url": "https://github.com/rodrigoarka/memento-mori-requiem",
   "manifest": "https://raw.githubusercontent.com/rodrigoarka/memento-mori-requiem/main/system.json",
-  "download": "https://github.com/rodrigoarka/memento-mori-requiem/releases/download/v0.9.0/memento-mori-requiem.zip"
+  "download": "https://github.com/rodrigoarka/memento-mori-requiem/releases/download/v0.9.1/memento-mori-requiem.zip"
 }
