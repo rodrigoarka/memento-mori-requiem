@@ -197,16 +197,29 @@ export async function applyTransformation(actor) {
   await note('TRANSFORMAÇÃO',`<p><b>${escapeHTML(actor.name)}</b> escolheu ${escapeHTML(kinds.find(k=>k.id===kind).name)}: <b>${escapeHTML(name)}</b>.</p>`,actor);
 }
 export async function formStanza(actor) {
-  if(!own(actor))return;
-  const verses=actor.items.filter(i=>i.type==='verso');
-  if(verses.length<3)return notification('São necessários três Versos diferentes, com evidências, da mesma região.');
-  const selected=verses.slice(-3);
-  if(selected.some(v=>!v.system.evidence.trim()))return notification('Cada Verso precisa registrar uma evidência concreta.');
-  const region=selected[0].system.region;
-  if(selected.some(v=>v.system.region!==region))return notification('Os três Versos devem pertencer à mesma região.');
-  const hypothesis=await promptText('Compor Estrofe','Hipótese sobre a exceção, aplicação ou limitação de uma Lei');
-  if(!hypothesis)return;
-  await note('ESTROFE',`<p><b>${escapeHTML(actor.name)} · ${escapeHTML(region||'Região')}</b></p><ol>${selected.map(v=>`<li>${escapeHTML(v.name)} — ${escapeHTML(v.system.evidence)}</li>`).join('')}</ol><p><b>Hipótese:</b> ${escapeHTML(hypothesis)}</p><p><em>Narrador: ofereça uma exceção, aplicação ou limitação verificável de uma Lei.</em></p>`,actor);
+  if (!own(actor)) return;
+  const verses=actor.items.filter(i=>i.type==='verso' && i.system.evidence?.trim());
+  const byRegion=new Map();
+  for (const v of verses) {
+    const region=(v.system.region||'Região sem nome').trim()||'Região sem nome';
+    if(!byRegion.has(region)) byRegion.set(region,[]);
+    byRegion.get(region).push(v);
+  }
+  const regions=[...byRegion].filter(([,items])=>new Set(items.map(v=>v.system.evidence.trim().toLowerCase())).size>=3);
+  if (!regions.length) return notification('São necessários três Versos com evidências independentes da mesma região.');
+  const region=regions.length===1?regions[0][0]:await selectOne('Compor Estrofe','Região investigada',regions.map(([id])=>({id,name:id})));
+  if(!region) return;
+  const distinct=new Map();
+  for(const v of byRegion.get(region)) distinct.set(v.system.evidence.trim().toLowerCase(),v);
+  const selected=[...distinct.values()].slice(-3);
+  const laws=[...new Set(selected.map(v=>(v.system.law||'').trim()).filter(Boolean))];
+  if(laws.length>1) return notification('Estes Versos mencionam Leis diferentes. Reúna evidências de uma mesma Lei.');
+  const hypothesis=await promptText('Estrofe · Hipótese','O que vocês acreditam que acontece, e em quais condições?');
+  if(!hypothesis) return;
+  const experiment=await promptText('Estrofe · Experimento','Como seus personagens vão testar essa hipótese?');
+  if(!experiment) return;
+  await note('ESTROFE · HIPÓTESE A TESTAR',
+    `<p><b>${escapeHTML(actor.name)} · ${escapeHTML(region)}</b></p><ol>${selected.map(v=>`<li>${escapeHTML(v.name)} — ${escapeHTML(v.system.evidence)}</li>`).join('')}</ol><p><b>Hipótese:</b> ${escapeHTML(hypothesis)}</p><p><b>Experimento:</b> ${escapeHTML(experiment)}</p><p><em>O Narrador responde ao experimento conforme a Lei já estabelecida. A Estrofe não revela automaticamente uma exceção.</em></p>`,actor);
 }
 export async function shareLaw(actor,lawId) {
   if(!game.user.isGM)return notification('Somente o Narrador registra Leis coletivas.');
