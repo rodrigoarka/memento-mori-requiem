@@ -34,11 +34,11 @@
             </div>
           {{else}}<p class="mm-empty">Uma pessoa, um lugar e uma promessa.</p>{{/each}}
           <h2>Distância <span class="mm-count">{{system.distance}} / 6</span></h2>
-          <div class="mm-track">{{#each (track 6 system.distance)}}<span class="{{#if this}}filled{{/if}}"></span>{{/each}}</div>
+          <div class="mm-distance-bar" role="progressbar" aria-label="Distância" aria-valuemin="0" aria-valuemax="6" aria-valuenow="{{system.distance}}"><div class="mm-distance-fill" style="width:{{distancePercent}}%"></div></div>
           <div class="mm-buttons"><button type="button" data-action="alterDistance" data-delta="1">+1</button><button type="button" data-action="alterDistance" data-delta="-1">−1</button></div>
           {{#if (eq system.distance 5)}}<p class="mm-hint">Presságio: uma Âncora está ameaçada. Marque-a como preferir.</p>{{/if}}
           <h2>Luto <span class="mm-count">{{system.mourning}} / 3</span></h2>
-          <div class="mm-track mourning">{{#each (track 3 system.mourning)}}<span class="{{#if this}}filled{{/if}}"></span>{{/each}}</div>
+          <div class="mm-luto-dots" role="group" aria-label="Luto, {{system.mourning}} de 3">{{#each (track 3 system.mourning)}}<span class="mm-luto-dot {{#if this}}filled{{/if}}"></span>{{/each}}</div>
           {{#if system.drift}}<div class="mm-warning">Deriva</div>{{/if}}
           {{#if system.rupture.active}}
           <div class="mm-danger"><b>Último Retorno · {{system.rupture.bell}}/3 Badaladas</b>
