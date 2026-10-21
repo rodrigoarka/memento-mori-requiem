@@ -79,3 +79,15 @@
 .memento-mori .mm-optional[open]>summary { margin-bottom:13px; }
 .memento-mori .mm-optional label { display:block; margin:10px 0; }
 .memento-mori .mm-optional h2 { margin-top:18px; }
+
+/* Visual de ficha 0.9.2: círculos, barra de Distância e Luto centralizado. */
+.memento-mori .mm-abilities input[type=number]{width:54px!important;height:54px!important;min-height:54px!important;padding:0!important;border:2px solid #507e98!important;border-radius:50%!important;text-align:center!important;font-size:22px!important;font-weight:bold;appearance:textfield;-moz-appearance:textfield;}
+.memento-mori .mm-abilities input[type=number]::-webkit-inner-spin-button,.memento-mori .mm-abilities input[type=number]::-webkit-outer-spin-button{-webkit-appearance:none;margin:0;}
+.memento-mori .mm-distance-bar{height:17px;width:100%;overflow:hidden;border-radius:999px;background:#dfebf0;border:1px solid #a8bdca;margin:12px 0;}
+.memento-mori .mm-distance-fill{height:100%;border-radius:999px;background:#507e98;transition:width .18s ease;}
+.memento-mori .mm-luto-dots{display:flex;align-items:center;justify-content:center;gap:15px;margin:12px 0 17px;}
+.memento-mori .mm-luto-dot{display:block;flex:0 0 22px;width:22px;height:22px;background:white;border:2px solid #242b31;border-radius:50%;}
+.memento-mori .mm-luto-dot.filled{background:#101010;border-color:#101010;}
+.memento-mori .mm-anchor-kind{display:flex;justify-content:flex-start;align-items:center;gap:10px;flex-wrap:wrap;margin:6px 0 12px;}
+.memento-mori .mm-anchor-kind label{display:flex;align-items:center;gap:5px;padding:5px 8px;cursor:pointer;}
+.memento-mori .mm-anchor-kind input[type=radio]{width:18px;height:18px;accent-color:#507e98;}
