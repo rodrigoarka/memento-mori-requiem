@@ -14,8 +14,8 @@ export class MementoDashboard extends BaseDashboard {
   static async voices(){await dialogResonance();}
   static async nextScene(){if(!game.user.isGM)return;await game.settings.set(SYS,'narrativeScene',scene()+1);await note('NOVA CENA',`<p>A cena narrativa <b>${scene()}</b> começou. Evocar pode ser usado novamente com uma Âncora elegível.</p>`);this.render();}
   static async nextChapter(){if(!game.user.isGM)return;const confirmed=await foundry.applications.api.DialogV2.confirm({window:{title:'Encerrar capítulo'},content:'<p>Um objetivo significativo de campanha foi concluído? O novo capítulo renova Assinaturas, recuperação de Distância e a oportunidade coletiva da Confluência. Fissuras só avançam por decisão do Narrador.</p>'});if(!confirmed)return;await game.settings.set(SYS,'chapter',chapter()+1);await game.settings.set(SYS,'narrativeScene',scene()+1);await note('NOVO CAPÍTULO',`<p>Começa o capítulo <b>${chapter()}</b>.</p>`);this.render();}
-  static async starter(){const confirmed=await foundry.applications.api.DialogV2.confirm({window:{title:'Conteúdo inicial'},content:'<p>Criar a aventura <b>A Segunda Lembrança</b> nos Diários, exemplos de domínio, entidade e Fissura em Atores, uma Confluência-modelo e quatro Assinaturas em Itens?</p>'});if(confirmed)await installStarterContent();}
-  static manual(){window.open(`systems/${SYS}/docs/manual-v0.8.pdf`,'_blank','noopener');}
+  static async starter(){const confirmed=await foundry.applications.api.DialogV2.confirm({window:{title:'Conteúdo inicial'},content:'<p>Criar a aventura <b>a aventura opcional <b>A Segunda Lembrança</b> nos Diários, exemplos de domínio, entidade e Fissura em Atores, uma Confluência-modelo e quatro Assinaturas em Itens?</p>'});if(confirmed)await installStarterContent();}
+  static manual(){window.open(`systems/${SYS}/docs/guia-rapido-v0.9.html`,'_blank','noopener');}
 }
 
 Hooks.once('init',async()=>{
