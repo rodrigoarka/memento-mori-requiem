@@ -1,70 +1,88 @@
 <div class="mm-app">
   <header class="mm-sheet-head">
-    <div class="mm-brand"><b>MEMENTO MORI · RÉQUIEM</b><span>O Limiar é um lugar de onde nem todos conseguem voltar.</span></div>
-    <div class="mm-identity"><label>Nome <input type="text" name="name" value="{{actor.name}}" /></label><div class="mm-subtitle">{{actor.type}} · Capítulo {{chapter}} · Cena {{scene}}</div></div>
-    <div class="mm-head-actions"><button type="button" data-action="rollWill"><i class="fa-solid fa-scale-balanced"></i> Vontade</button><button type="button" data-action="rollVoices" class="gold"><i class="fa-solid fa-coins"></i> Três Vozes</button></div>
+    <div class="mm-brand"><b>MEMENTO MORI · RÉQUIEM</b><span>Leve de jogar. Intenso de sentir.</span></div>
+    <div class="mm-identity"><label>Nome<input type="text" name="name" value="{{actor.name}}"></label></div>
+    <div class="mm-head-actions"><button type="button" data-action="rollWill">Vontade</button><button type="button" data-action="rollVoices" class="gold">Três Vozes</button></div>
   </header>
   {{#if isRetornado}}
-  <nav class="mm-tabs">
-    <button type="button" data-action="switchTab" data-tab="essencial" class="{{#if (eq tab 'essencial')}}active{{/if}}">Personagem</button>
-    <button type="button" data-action="switchTab" data-tab="vinculos" class="{{#if (eq tab 'vinculos')}}active{{/if}}">Vínculos</button>
-    <button type="button" data-action="switchTab" data-tab="conhecimento" class="{{#if (eq tab 'conhecimento')}}active{{/if}}">Descobertas</button>
-    <button type="button" data-action="switchTab" data-tab="historia" class="{{#if (eq tab 'historia')}}active{{/if}}">Anotações</button>
-  </nav>
-  {{#if (eq tab 'essencial')}}
-  <section class="mm-columns">
-    <div class="mm-panel"><h2>Capacidades</h2><p class="mm-hint">Distribua 2, 1, 1, 0. Alcance: Capacidade + Preparo (0/1) + Conhecimento (0/1).</p>
-    <div class="mm-abilities">
-      <label>Lucidez <small>Investigar e compreender</small><input name="system.abilities.lucidez" type="number" min="0" max="2" value="{{system.abilities.lucidez}}"></label>
-      <label>Pulso <small>Agir e manipular</small><input name="system.abilities.pulso" type="number" min="0" max="2" value="{{system.abilities.pulso}}"></label>
-      <label>Elo <small>Relacionar e perceber</small><input name="system.abilities.elo" type="number" min="0" max="2" value="{{system.abilities.elo}}"></label>
-      <label>Firmeza <small>Resistir e decidir</small><input name="system.abilities.firmeza" type="number" min="0" max="2" value="{{system.abilities.firmeza}}"></label>
-    </div>
-    <h2>Aptidões <button type="button" class="mm-add" data-action="createChild" data-type="aptidao">+ Nova</button></h2>
-    {{#each aptidoes}}<div class="mm-entry"><strong>{{name}}</strong><span><button type="button" data-action="editChild" data-id="{{id}}">Editar</button><button type="button" data-action="deleteChild" data-id="{{id}}">×</button></span></div>{{else}}<p class="mm-empty">Escolha duas Aptidões.</p>{{/each}}
-    <h2>Assinaturas <button type="button" class="mm-add" data-action="createChild" data-type="assinatura">+ Nova</button></h2>
-    {{#each assinaturas}}<div class="mm-entry"><div><strong>{{name}}</strong><small>{{system.effect}}</small></div><span><button type="button" data-action="signature" data-id="{{id}}">Ativar</button><button type="button" data-action="editChild" data-id="{{id}}">Editar</button></span></div>{{else}}<p class="mm-empty">Escolha uma Assinatura.</p>{{/each}}
-    </div>
-    <div class="mm-panel"><h2>Distância <span class="mm-count">{{system.distance}} / 6</span></h2>
-      <div class="mm-track">{{#each (track 6 system.distance)}}<span class="{{#if this}}filled{{/if}}"></span>{{/each}}</div>
-      <p class="mm-hint">0–2 Presença · 3 Eco · 4 Interferência · 5 Presságio · 6 Ruptura</p>
-      <div class="mm-buttons"><button type="button" data-action="alterDistance" data-delta="1">+1 Distância</button><button type="button" data-action="alterDistance" data-delta="-1">−1 Distância</button></div>
-      {{#if system.drift}}<div class="mm-warning">DERIVA · personagem fora da campanha habitual.</div>{{/if}}
-      {{#if system.rupture.active}}<div class="mm-danger"><b>ÚLTIMO RETORNO — {{system.rupture.bell}}/3 Badaladas</b><p>Âncora Reclamada: {{ruptureAnchor.name}}</p>
-        <div class="mm-buttons"><button type="button" data-action="bell">Avançar Badalada</button><button type="button" data-action="saveAnchor">Resgatar Âncora</button>{{#if isGM}}<button type="button" data-action="breakAnchor">Quebrar Âncora</button>{{/if}}</div></div>{{/if}}
-      <h2>Travessia física</h2><p class="mm-hint">{{#if system.journey.active}}No Limiar, estrato mais profundo {{system.journey.deepest}}.{{else}}Na Vigília: o corpo está presente no cotidiano.{{/if}}</p>
-      <div class="mm-buttons"><button type="button" data-action="journey" data-type="enter">Entrar</button><button type="button" data-action="journey" data-type="deepen">Aprofundar</button><button type="button" data-action="returnHome">Regressar</button></div>
-      <details class="mm-optional"><summary>Evolução e procedimentos</summary><p class="mm-hint">O Narrador acompanha os capítulos. Escolher uma Transformação atualiza a ficha sem exigir um histórico paralelo.</p><button type="button" data-action="transformation" {{#unless canTransform}}disabled{{/unless}}>Escolher Transformação{{#if canTransform}} disponível{{/if}}</button>
-      <h2>Condições <button type="button" class="mm-add" data-action="createChild" data-type="condicao">+ Nova</button></h2>
-      {{#each condicoes}}<div class="mm-entry"><strong>{{name}}</strong><span><button type="button" data-action="editChild" data-id="{{id}}">Editar</button><button type="button" data-action="deleteChild" data-id="{{id}}">×</button></span></div>{{else}}<p class="mm-empty">Sem Condições.</p>{{/each}}</details>
-    </div>
-  </section>
+    <nav class="mm-tabs">
+      <button type="button" data-action="switchTab" data-tab="essencial" class="{{#if (eq tab 'essencial')}}active{{/if}}">Meu personagem</button>
+      <button type="button" data-action="switchTab" data-tab="historia" class="{{#if (eq tab 'historia')}}active{{/if}}">Minhas anotações</button>
+    </nav>
+    {{#if (eq tab 'essencial')}}
+      <section class="mm-columns">
+        <div class="mm-panel">
+          <label>Quem sou<input name="system.profession" value="{{system.profession}}" placeholder="Uma frase sobre o cotidiano"></label>
+          <h2>Capacidades</h2>
+          <div class="mm-abilities">
+            <label>Lucidez<small>Compreender</small><input name="system.abilities.lucidez" type="number" min="0" max="2" value="{{system.abilities.lucidez}}"></label>
+            <label>Pulso<small>Agir</small><input name="system.abilities.pulso" type="number" min="0" max="2" value="{{system.abilities.pulso}}"></label>
+            <label>Elo<small>Relacionar</small><input name="system.abilities.elo" type="number" min="0" max="2" value="{{system.abilities.elo}}"></label>
+            <label>Firmeza<small>Persistir</small><input name="system.abilities.firmeza" type="number" min="0" max="2" value="{{system.abilities.firmeza}}"></label>
+          </div>
+          <h2>Aptidões <button type="button" class="mm-add" data-action="createChild" data-type="aptidao">+ Nova</button></h2>
+          {{#each aptidoes}}<div class="mm-entry"><strong>{{name}}</strong><button type="button" data-action="editChild" data-id="{{id}}">Editar</button></div>{{else}}<p class="mm-empty">Escolha duas.</p>{{/each}}
+          <h2>Assinaturas <button type="button" class="mm-add" data-action="createChild" data-type="assinatura">+ Nova</button></h2>
+          {{#each assinaturas}}<div class="mm-entry"><div><strong>{{name}}</strong><small>{{system.effect}}</small></div><span><button type="button" data-action="signature" data-id="{{id}}">Usar</button><button type="button" data-action="editChild" data-id="{{id}}">Editar</button></span></div>{{else}}<p class="mm-empty">Escolha uma.</p>{{/each}}
+        </div>
+        <div class="mm-panel">
+          <h2>Âncoras <button type="button" class="mm-add" data-action="createChild" data-type="ancora">+ Nova</button></h2>
+          {{#each ancoras}}
+            <div class="mm-anchor {{#if system.broken}}broken{{/if}}">
+              <div><strong>{{name}}</strong><small>{{#if system.broken}}Perdida{{else if system.reclaimed}}Reclamada{{else}}{{system.anchorType}}{{/if}}</small></div>
+              <span><button type="button" data-action="recover" data-id="{{id}}" {{#if system.broken}}disabled{{/if}}>Cultivar</button><button type="button" data-action="editChild" data-id="{{id}}">Editar</button></span>
+            </div>
+          {{else}}<p class="mm-empty">Uma pessoa, um lugar e uma promessa.</p>{{/each}}
+          <h2>Distância <span class="mm-count">{{system.distance}} / 6</span></h2>
+          <div class="mm-track">{{#each (track 6 system.distance)}}<span class="{{#if this}}filled{{/if}}"></span>{{/each}}</div>
+          <div class="mm-buttons"><button type="button" data-action="alterDistance" data-delta="1">+1</button><button type="button" data-action="alterDistance" data-delta="-1">−1</button></div>
+          {{#if (eq system.distance 5)}}<p class="mm-hint">Presságio: uma Âncora está ameaçada. Marque-a como preferir.</p>{{/if}}
+          <h2>Luto <span class="mm-count">{{system.mourning}} / 3</span></h2>
+          <div class="mm-track mourning">{{#each (track 3 system.mourning)}}<span class="{{#if this}}filled{{/if}}"></span>{{/each}}</div>
+          {{#if system.drift}}<div class="mm-warning">Deriva</div>{{/if}}
+          {{#if system.rupture.active}}
+          <div class="mm-danger"><b>Último Retorno · {{system.rupture.bell}}/3 Badaladas</b>
+            <p>Âncora Reclamada: {{ruptureAnchor.name}}</p>
+            <div class="mm-buttons"><button type="button" data-action="bell">Badalada</button><button type="button" data-action="saveAnchor">Salvar Âncora</button>{{#if isGM}}<button type="button" data-action="breakAnchor">Quebrar Âncora</button>{{/if}}</div>
+          </div>{{/if}}
+          <details class="mm-optional"><summary>Procedimentos, quando precisar</summary>
+            <h2>Travessia</h2>
+            <p class="mm-hint">{{#if system.journey.active}}No Limiar · estrato {{system.journey.deepest}}{{else}}Na Vigília{{/if}}</p>
+            <div class="mm-buttons"><button type="button" data-action="journey" data-type="enter">Entrar</button><button type="button" data-action="journey" data-type="deepen">Aprofundar</button><button type="button" data-action="returnHome">Regressar</button></div>
+            <p class="mm-hint">Recuperação neste capítulo: {{#if (eq system.recovery.chapter chapter)}}{{system.recovery.count}}{{else}}0{{/if}}/2 cenas.</p>
+            <button type="button" data-action="transformation" {{#unless canTransform}}disabled{{/unless}}>Escolher Transformação{{#if canTransform}} disponível{{/if}}</button>
+            <h2>Condições <button type="button" data-action="createChild" data-type="condicao">+ Nova</button></h2>
+            {{#each condicoes}}<div class="mm-entry"><strong>{{name}}</strong><span><button type="button" data-action="editChild" data-id="{{id}}">Editar</button><button type="button" data-action="deleteChild" data-id="{{id}}">×</button></span></div>{{/each}}
+          </details>
+        </div>
+      </section>
+    {{/if}}
+    {{#if (eq tab 'historia')}}
+      <section class="mm-columns">
+        <div class="mm-panel"><h2>Minhas anotações</h2><p class="mm-hint">Leis, dúvidas, lembranças e acontecimentos podem ficar aqui ou em qualquer outro lugar.</p><label>Escreva livremente<textarea name="system.notes" rows="18">{{system.notes}}</textarea></label></div>
+        <div class="mm-panel">
+          <details class="mm-optional"><summary>Informações da história, se quiser</summary>
+            <label>Primeira Lembrança<textarea name="system.firstMemory" rows="4">{{system.firstMemory}}</textarea></label>
+            <label>Impressão<textarea name="system.impression" rows="3">{{system.impression}}</textarea></label>
+            <label>Incompletude<textarea name="system.incompleteness" rows="4">{{system.incompleteness}}</textarea></label>
+            <label>Biografia<textarea name="system.biography" rows="5">{{system.biography}}</textarea></label>
+            <label>Quem perceberá sua ausência?<textarea name="system.emptyPlace" rows="3">{{system.emptyPlace}}</textarea></label>
+          </details>
+          <details class="mm-optional"><summary>Descobertas estruturadas, se preferir</summary>
+            <h2>Leis <button type="button" data-action="createChild" data-type="lei">+ Lei</button></h2>
+            {{#each leis}}<div class="mm-entry"><strong>{{name}}</strong><span>{{#if (eq id ../system.interiorLawId)}}<button type="button" data-action="interiorize" data-id="{{id}}">Usar</button>{{/if}}<button type="button" data-action="editChild" data-id="{{id}}">Editar</button></span></div>{{/each}}
+            <h2>Versos <button type="button" data-action="createChild" data-type="verso">+ Verso</button></h2>
+            {{#each versos}}<div class="mm-entry"><strong>{{name}}</strong><button type="button" data-action="editChild" data-id="{{id}}">Editar</button></div>{{/each}}
+            <button type="button" data-action="stanza">Compor Estrofe</button>
+            <h2>Correspondências <button type="button" data-action="createChild" data-type="correspondencia">+ Nova</button></h2>
+            {{#each correspondencias}}<div class="mm-entry"><strong>{{name}}</strong><button type="button" data-action="editChild" data-id="{{id}}">Editar</button></div>{{/each}}
+            <h2>Equipamento <button type="button" data-action="createChild" data-type="equipamento">+ Novo</button></h2>
+            {{#each equipamentos}}<div class="mm-entry"><strong>{{name}}</strong><button type="button" data-action="editChild" data-id="{{id}}">Editar</button></div>{{/each}}
+          </details>
+        </div>
+      </section>
+    {{/if}}
   {{/if}}
-  {{#if (eq tab 'vinculos')}}
-  <section class="mm-columns">
-    <div class="mm-panel"><h2>Âncoras <button type="button" class="mm-add" data-action="createChild" data-type="ancora">+ Nova</button></h2><p class="mm-hint">Crie uma pessoa, um lugar e uma promessa. A Âncora Reclamada fica indisponível até o Último Retorno.</p>
-    {{#each ancoras}}<div class="mm-anchor {{#if system.broken}}broken{{/if}}"><div><strong>{{name}}</strong><small>{{system.anchorType}} · {{#if system.broken}}QUEBRADA{{else if system.reclaimed}}RECLAMADA{{else}}Ativa{{/if}}</small></div><div class="mm-buttons"><button type="button" data-action="recover" data-id="{{id}}" {{#if system.broken}}disabled{{/if}}>Cultivar (−1)</button><button type="button" data-action="editChild" data-id="{{id}}">Editar</button></div></div>{{else}}<p class="mm-empty">Registre suas três Âncoras.</p>{{/each}}
-    </div>
-    <div class="mm-panel"><h2>Luto <span class="mm-count">{{system.mourning}} / 3</span></h2><div class="mm-track mourning">{{#each (track 3 system.mourning)}}<span class="{{#if this}}filled{{/if}}"></span>{{/each}}</div><p>Três perdas ou a última Âncora perdida conduzem à Deriva. O Luto permanece mesmo após Reconciliação.</p><h2>Recuperação deste capítulo</h2><p>{{#if (eq system.recovery.chapter chapter)}}{{system.recovery.count}} / 2 cenas utilizadas{{else}}0 / 2 cenas utilizadas{{/if}}</p></div>
-  </section>{{/if}}
-  {{#if (eq tab 'conhecimento')}}
-  <section class="mm-columns"><div class="mm-panel"><h2>Leis <button type="button" class="mm-add" data-action="createChild" data-type="lei">+ Nova</button></h2>{{#each leis}}<div class="mm-entry"><div><strong>{{name}}</strong><small>{{system.law}}</small></div><span>{{#if (eq id ../system.interiorLawId)}}<button type="button" data-action="interiorize" data-id="{{id}}">Interiorizar</button>{{/if}}<button type="button" data-action="editChild" data-id="{{id}}">Editar</button></span></div>{{/each}}<h2>Correspondências <button type="button" class="mm-add" data-action="createChild" data-type="correspondencia">+ Nova</button></h2>{{#each correspondencias}}<div class="mm-entry"><strong>{{name}}</strong><button type="button" data-action="editChild" data-id="{{id}}">Editar</button></div>{{/each}}</div><div class="mm-panel"><h2>Versos <button type="button" class="mm-add" data-action="createChild" data-type="verso">+ Novo</button></h2>{{#each versos}}<div class="mm-entry"><div><strong>{{name}}</strong><small>{{system.evidence}}</small></div><button type="button" data-action="editChild" data-id="{{id}}">Editar</button></div>{{else}}<p class="mm-empty">Cada Verso precisa de evidência observável e região.</p>{{/each}}<button type="button" data-action="stanza">Compor Estrofe (3 Versos)</button><h2>Equipamento <button type="button" class="mm-add" data-action="createChild" data-type="equipamento">+ Novo</button></h2>{{#each equipamentos}}<div class="mm-entry"><strong>{{name}}</strong><button type="button" data-action="editChild" data-id="{{id}}">Editar</button></div>{{/each}}</div></section>
-  {{/if}}
-  {{#if (eq tab 'historia')}}
-  <section class="mm-columns">
-    <div class="mm-panel"><h2>Minhas anotações</h2><p class="mm-hint">Escreva apenas o que importa para seu personagem. Leis e lembranças podem ficar aqui, em um caderno ou onde você preferir.</p><label>Notas livres<textarea name="system.notes" rows="16">{{system.notes}}</textarea></label></div>
-    <div class="mm-panel"><h2>Quem sou</h2><label>Cotidiano ou conceito<input name="system.profession" value="{{system.profession}}"></label>
-      <details class="mm-optional"><summary>Outros registros, se quiser</summary>
-       <label>Primeira Lembrança<textarea name="system.firstMemory" rows="3">{{system.firstMemory}}</textarea></label>
-       <label>Impressão<textarea name="system.impression" rows="3">{{system.impression}}</textarea></label>
-       <label>Incompletude<textarea name="system.incompleteness" rows="3">{{system.incompleteness}}</textarea></label>
-       <label>História<textarea name="system.biography" rows="6">{{system.biography}}</textarea></label>
-       <label>O Lugar Vazio<textarea name="system.emptyPlace" rows="3">{{system.emptyPlace}}</textarea></label>
-      </details></div>
-  </section>
-  {{/if}}
-  {{/if}}
-
 
   {{#if isConfluencia}}
   <section class="mm-columns">
