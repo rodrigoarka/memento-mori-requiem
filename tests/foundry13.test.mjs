@@ -71,7 +71,7 @@ test('Foundry 13.348: inicializa modelos, fichas, configurações e painel', asy
   assert.equal(typeof game.memento.voices, 'function');
 });
 
-test('manifesto instala a versão 0.9.0 no Foundry 13.348 a 14', () => {
+test('manifesto instala a versão 0.9.1 no Foundry 13.348 a 14', () => {
   const manifest = JSON.parse(fs.readFileSync(new URL('../system.json', import.meta.url), 'utf8'));
   const pkg = JSON.parse(fs.readFileSync(new URL('../package.json', import.meta.url), 'utf8'));
   assert.equal(manifest.compatibility.minimum, '13.348');
