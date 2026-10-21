@@ -65,11 +65,96 @@
   {{/if}}
   {{/if}}
 
-  {{#if isConfluencia}}<section class="mm-columns"><div class="mm-panel"><h2>Confluência</h2><label>Verso Comum<textarea name="system.commonVerse" rows="4">{{system.commonVerse}}</textarea></label><label>Participantes<input name="system.members" value="{{system.members}}"></label><div class="mm-warning">{{#if unusedOpportunity}}Oportunidade coletiva DISPONÍVEL{{else}}Oportunidade coletiva UTILIZADA neste capítulo{{/if}}</div><button type="button" data-action="rastro">Rastro Compartilhado</button><p class="mm-hint">Sincronia é pré-declarada no diálogo das Três Vozes e compete com Rastro.</p><label>Último Rastro<textarea name="system.lastTrail" rows="4">{{system.lastTrail}}</textarea></label></div><div class="mm-panel"><h2>Leis compartilhadas <button type="button" class="mm-add" data-action="createChild" data-type="lei">+ Lei</button></h2>{{#each leis}}<div class="mm-entry"><strong>{{name}}</strong><button type="button" data-action="editChild" data-id="{{id}}">Editar</button></div>{{/each}}<h2>Versos <button type="button" class="mm-add" data-action="createChild" data-type="verso">+ Verso</button></h2>{{#each versos}}<div class="mm-entry"><strong>{{name}}</strong><button type="button" data-action="editChild" data-id="{{id}}">Editar</button></div>{{/each}}<button type="button" data-action="stanza">Compor Estrofe</button><label>Caminhos e Marcos de Regresso<textarea name="system.routes" rows="5">{{system.routes}}</textarea></label><label>Anotações do grupo<textarea name="system.notes" rows="5">{{system.notes}}</textarea></label></div></section>{{/if}}
 
-  {{#if isEntidade}}<section class="mm-columns"><div class="mm-panel"><h2>Entidade · três perguntas</h2><p class="mm-hint">O que deseja? Como age? Como seus personagens podem lidar com ela? Os demais campos são opcionais.</p><label>Imagem e modo de agir<textarea name="system.nature">{{system.nature}}</textarea></label><label>O que deseja?<textarea name="system.intention">{{system.intention}}</textarea></label><label>Como lidar com ela?<textarea name="system.approaches">{{system.approaches}}</textarea></label><label>Lei observável (se houver)<textarea name="system.law">{{system.law}}</textarea></label><label>Limitação<textarea name="system.limitation">{{system.limitation}}</textarea></label><label>Sinais<textarea name="system.signs">{{system.signs}}</textarea></label><label>Consequência<textarea name="system.consequence">{{system.consequence}}</textarea></label></div><div class="mm-panel">{{> "systems/memento-mori-requiem/templates/pressure.hbs"}}<label>Notas<textarea name="system.notes" rows="7">{{system.notes}}</textarea></label></div></section>{{/if}}
+  {{#if isConfluencia}}
+  <section class="mm-columns">
+    <div class="mm-panel">
+      <h2>Confluência</h2>
+      <label>Verso Comum<textarea name="system.commonVerse" rows="4">{{system.commonVerse}}</textarea></label>
+      <label>Quem participa<input name="system.members" value="{{system.members}}"></label>
+      <p class="mm-hint">{{#if unusedOpportunity}}Oportunidade coletiva disponível{{else}}Oportunidade coletiva utilizada neste capítulo{{/if}}</p>
+      <button type="button" data-action="rastro">Rastro Compartilhado</button>
+      <p class="mm-hint">Sincronia é escolhida na Ressonância. As duas opções compartilham uma oportunidade por capítulo.</p>
+      <label>Notas livres<textarea name="system.notes" rows="8">{{system.notes}}</textarea></label>
+    </div>
+    <div class="mm-panel">
+      <details class="mm-optional"><summary>Descobertas e caminhos, se precisar</summary>
+        <h2>Leis <button type="button" data-action="createChild" data-type="lei">+ Lei</button></h2>
+        {{#each leis}}<div class="mm-entry"><strong>{{name}}</strong><button type="button" data-action="editChild" data-id="{{id}}">Editar</button></div>{{/each}}
+        <h2>Versos <button type="button" data-action="createChild" data-type="verso">+ Verso</button></h2>
+        {{#each versos}}<div class="mm-entry"><strong>{{name}}</strong><button type="button" data-action="editChild" data-id="{{id}}">Editar</button></div>{{/each}}
+        <button type="button" data-action="stanza">Compor Estrofe</button>
+        <label>Caminhos<textarea name="system.routes" rows="4">{{system.routes}}</textarea></label>
+        <label>Último Rastro<textarea name="system.lastTrail" rows="3">{{system.lastTrail}}</textarea></label>
+      </details>
+    </div>
+  </section>{{/if}}
 
-  {{#if isDominio}}<section class="mm-columns"><div class="mm-panel"><h2>Preparação do domínio</h2><label>Aparência<textarea name="system.appearance">{{system.appearance}}</textarea></label><label>Objetivo do grupo<textarea name="system.objective">{{system.objective}}</textarea></label><label>Sinais observáveis<textarea name="system.signals" rows="3">{{system.signals}}</textarea></label><label>Lei principal<textarea name="system.law" rows="3">{{system.law}}</textarea></label><label>Exceção investigável (se houver)<textarea name="system.exception" rows="3">{{system.exception}}</textarea></label><label>Preço / limitação<textarea name="system.cost">{{system.cost}}</textarea></label><label>Oposição<textarea name="system.opposition">{{system.opposition}}</textarea></label><label>Duas rotas<textarea name="system.routes">{{system.routes}}</textarea></label><label>Marco de Regresso<textarea name="system.returnMark">{{system.returnMark}}</textarea></label></div><div class="mm-panel"><h2>Matriz das Vozes</h2><label>Corpo<textarea name="system.matrixBody">{{system.matrixBody}}</textarea></label><label>Memória<textarea name="system.matrixMemory">{{system.matrixMemory}}</textarea></label><label>Véu<textarea name="system.matrixVeil">{{system.matrixVeil}}</textarea></label>{{> "systems/memento-mori-requiem/templates/pressure.hbs"}}<h2>Leis <button type="button" data-action="createChild" data-type="lei">+ Lei</button></h2>{{#each leis}}<div class="mm-entry"><strong>{{name}}</strong><span><button type="button" data-action="editChild" data-id="{{id}}">Editar</button>{{#if ../isGM}}<button type="button" data-action="shareLaw" data-id="{{id}}">Compartilhar</button>{{/if}}</span></div>{{/each}}<h2>Versos <button type="button" data-action="createChild" data-type="verso">+ Verso</button></h2>{{#each versos}}<div class="mm-entry"><strong>{{name}}</strong><button type="button" data-action="editChild" data-id="{{id}}">Editar</button></div>{{/each}}<button type="button" data-action="stanza">Compor Estrofe</button></div></section>{{/if}}
+  {{#if isEntidade}}
+  <section class="mm-columns">
+    <div class="mm-panel"><h2>Entidade · três perguntas</h2>
+      <label>O que deseja?<textarea name="system.intention">{{system.intention}}</textarea></label>
+      <label>Como age?<textarea name="system.nature">{{system.nature}}</textarea></label>
+      <label>Como lidar com ela?<textarea name="system.approaches">{{system.approaches}}</textarea></label>
+      <label>Notas livres<textarea name="system.notes" rows="6">{{system.notes}}</textarea></label>
+    </div>
+    <div class="mm-panel"><details class="mm-optional"><summary>Se esta entidade pedir mais detalhes</summary>
+      <label>Lei própria (opcional)<textarea name="system.law">{{system.law}}</textarea></label>
+      <label>Limite<textarea name="system.limitation">{{system.limitation}}</textarea></label>
+      <label>Sinais<textarea name="system.signs">{{system.signs}}</textarea></label>
+      <label>Consequência<textarea name="system.consequence">{{system.consequence}}</textarea></label>
+      {{> "systems/memento-mori-requiem/templates/pressure.hbs"}}
+    </details></div>
+  </section>{{/if}}
 
-  {{#if isFissura}}<section class="mm-columns"><div class="mm-panel"><h2>Incompletude e Fissura</h2><label>Origem<textarea name="system.origin">{{system.origin}}</textarea></label><label>Sinais<textarea name="system.signs">{{system.signs}}</textarea></label><label>1 — Vestígio<textarea name="system.vestige">{{system.vestige}}</textarea></label><label>2 — Manifestação<textarea name="system.manifestation">{{system.manifestation}}</textarea></label><label>3 — Invasão<textarea name="system.invasion">{{system.invasion}}</textarea></label><label>4 — Concretização<textarea name="system.concretization">{{system.concretization}}</textarea></label></div><div class="mm-panel"><h2>Escalada de Fissura</h2><div class="mm-track">{{#each (track 4 system.stage)}}<span class="{{#if this}}filled{{/if}}"></span>{{/each}}</div><p>Estágio atual: <b>{{system.stage}} / 4</b></p><div class="mm-buttons"><button type="button" data-action="fissureChange" data-delta="-1" {{#unless isGM}}disabled{{/unless}}>Recuar</button><button type="button" data-action="fissureChange" data-delta="1" {{#unless isGM}}disabled{{/unless}}>Avançar</button></div><label><input type="checkbox" name="system.active" {{#if system.active}}checked{{/if}}> Fissura ativa</label><label><input type="checkbox" name="system.contained" {{#if system.contained}}checked{{/if}}> Contenção efetiva</label><p class="mm-hint">Avança no máximo um estágio por capítulo; decisões e Sinais determinam o momento.</p><label>Notas de investigação<textarea name="system.notes" rows="8">{{system.notes}}</textarea></label></div></section>{{/if}}
+  {{#if isDominio}}
+  <section class="mm-columns">
+    <div class="mm-panel"><h2>Domínio · cinco ideias</h2>
+      <label>Lugar<textarea name="system.appearance">{{system.appearance}}</textarea></label>
+      <label>Estranheza<textarea name="system.signals">{{system.signals}}</textarea></label>
+      <label>Lei · condição e efeito<textarea name="system.law">{{system.law}}</textarea></label>
+      <label>Complicação<textarea name="system.opposition">{{system.opposition}}</textarea></label>
+      <label>Saída / Marco de Regresso<textarea name="system.returnMark">{{system.returnMark}}</textarea></label>
+      <label>Notas livres<textarea name="system.notes" rows="5">{{system.notes}}</textarea></label>
+    </div>
+    <div class="mm-panel"><details class="mm-optional"><summary>Outras ideias, se forem necessárias</summary>
+      <label>Objetivo do grupo<textarea name="system.objective">{{system.objective}}</textarea></label>
+      <label>Exceção investigável<textarea name="system.exception">{{system.exception}}</textarea></label>
+      <label>Preço ou limitação<textarea name="system.cost">{{system.cost}}</textarea></label>
+      <label>Rotas<textarea name="system.routes">{{system.routes}}</textarea></label>
+      <h2>Três Vozes, inspirações</h2>
+      <label>Corpo<textarea name="system.matrixBody">{{system.matrixBody}}</textarea></label>
+      <label>Memória<textarea name="system.matrixMemory">{{system.matrixMemory}}</textarea></label>
+      <label>Véu<textarea name="system.matrixVeil">{{system.matrixVeil}}</textarea></label>
+      {{> "systems/memento-mori-requiem/templates/pressure.hbs"}}
+      <h2>Leis <button type="button" data-action="createChild" data-type="lei">+ Lei</button></h2>
+      {{#each leis}}<div class="mm-entry"><strong>{{name}}</strong><span><button type="button" data-action="editChild" data-id="{{id}}">Editar</button>{{#if ../isGM}}<button type="button" data-action="shareLaw" data-id="{{id}}">Compartilhar</button>{{/if}}</span></div>{{/each}}
+      <h2>Versos <button type="button" data-action="createChild" data-type="verso">+ Verso</button></h2>
+      {{#each versos}}<div class="mm-entry"><strong>{{name}}</strong><button type="button" data-action="editChild" data-id="{{id}}">Editar</button></div>{{/each}}
+      <button type="button" data-action="stanza">Compor Estrofe</button>
+    </details></div>
+  </section>{{/if}}
+
+  {{#if isFissura}}
+  <section class="mm-columns">
+    <div class="mm-panel"><h2>Fissura</h2>
+      <label>Origem<textarea name="system.origin">{{system.origin}}</textarea></label>
+      <label>Sinais<textarea name="system.signs">{{system.signs}}</textarea></label>
+      <label>Notas livres<textarea name="system.notes" rows="8">{{system.notes}}</textarea></label>
+      <details class="mm-optional"><summary>Escalada preparada, se precisar</summary>
+        <label>1 · Vestígio<textarea name="system.vestige">{{system.vestige}}</textarea></label>
+        <label>2 · Manifestação<textarea name="system.manifestation">{{system.manifestation}}</textarea></label>
+        <label>3 · Invasão<textarea name="system.invasion">{{system.invasion}}</textarea></label>
+        <label>4 · Concretização<textarea name="system.concretization">{{system.concretization}}</textarea></label>
+      </details>
+    </div>
+    <div class="mm-panel">
+      <h2>Estágio {{system.stage}} / 4</h2>
+      <div class="mm-track">{{#each (track 4 system.stage)}}<span class="{{#if this}}filled{{/if}}"></span>{{/each}}</div>
+      <div class="mm-buttons"><button type="button" data-action="fissureChange" data-delta="-1" {{#unless isGM}}disabled{{/unless}}>Recuar</button><button type="button" data-action="fissureChange" data-delta="1" {{#unless isGM}}disabled{{/unless}}>Avançar</button></div>
+      <label><input type="checkbox" name="system.active" {{#if system.active}}checked{{/if}}> Ativa</label>
+      <label><input type="checkbox" name="system.contained" {{#if system.contained}}checked{{/if}}> Contida</label>
+      <p class="mm-hint">No máximo um avanço por capítulo, se a causa estiver ativa e sem contenção.</p>
+    </div>
+  </section>{{/if}}
 </div>
