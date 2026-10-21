@@ -1,6 +1,6 @@
 # Memento Mori: Réquiem — Sistema Foundry VTT
 
-**Versão do sistema: 0.9.0 — Baseado no Manual Básico de Regras v0.9.1 (playtest).**
+**Versão do sistema: 0.9.1 — Interface simplificada; Manual Básico v0.9.2 de playtest.**
 **Plataforma alvo: Foundry Virtual Tabletop v13.348 e v14.**
 
 ## Instalação por URL — Disponível
@@ -11,7 +11,7 @@ No Foundry VTT 13.348 ou 14, abra **Configuração → Sistemas de Jogo → Inst
 https://raw.githubusercontent.com/rodrigoarka/memento-mori-requiem/main/system.json
 ```
 
-A **Release v0.9.0** é a edição de desenvolvimento correspondente às regras 0.9. [Ver releases](https://github.com/rodrigoarka/memento-mori-requiem/releases).
+A **Release v0.9.1** introduz fichas leves, com registros opcionais e áreas de anotações livres. [Ver releases](https://github.com/rodrigoarka/memento-mori-requiem/releases).
 
 Atualizações futuras usarão o mesmo manifesto estável. As instruções de publicação estão em `PUBLICACAO.md`.
 
@@ -31,9 +31,18 @@ Alternativa para o Narrador, com o Mundo aberto: Console do Foundry → `game.me
 
 **A Vontade** resolve ações quando há uma resistência significativa. O jogador descreve sua intenção e abordagem antes de consultar valores. **O Reencontro** é a intenção estética: descobertas podem mudar o significado de um vínculo, uma lembrança ou uma escolha. Não é uma regra de pontos ou uma conclusão obrigatória.
 
-O painel abre **`docs/guia-rapido-v0.9.html`**, uma referência atualizada com as regras centrais. O PDF em `docs/manual-v0.8.pdf` permanece no repositório apenas como arquivo histórico. O Manual Básico 0.9.1 completo está sendo distribuído separadamente durante o playtest e ainda precisa ser incorporado ao repositório.
+O painel abre **`docs/guia-rapido-v0.9.html`**, uma referência atualizada com as regras centrais. O PDF em `docs/manual-v0.8.pdf` permanece no repositório apenas como arquivo histórico. O Manual Básico 0.9.2 revisado e o caderno de aventura separado são distribuídos como documentos de playtest. Ainda precisam ser incorporados ao repositório como artefatos editoriais.
 
 *A Segunda Lembrança* é conteúdo opcional. O Limiar não está limitado à estação ou aos personagens dos exemplos.
+
+## Fichas leves (0.9.1)
+
+- Retornado: **Meu personagem** e **Minhas anotações**, com Capacidades, Aptidões, Assinaturas, Âncoras, Distância e Luto à vista.
+- Confluência: Verso Comum e oportunidade coletiva, com descobertas opcionais.
+- Domínio: cinco ideias centrais e detalhes opcionais.
+- Entidade: três perguntas, com Lei e Pressão opcionais.
+- Fissura: origem, sinais e estágio, com escalada detalhada opcional.
+- Campos internos antigos permanecem no modelo para preservar mundos existentes, mas não exigem preenchimento na interface.
 
 ## O que foi implementado
 
