@@ -36,7 +36,7 @@ jobs:
           const tag = "v" + m.version;
           if (!/^v\d+\.\d+\.\d+$/.test(tag)) throw new Error("Versão inválida");
           if (m.download !== `https://github.com/${process.env.GITHUB_REPOSITORY}/releases/download/${tag}/memento-mori-requiem.zip`) throw new Error("URL de download difere da versão/repositório");
-          const files = ["module/main.mjs", "styles/memento.css", "templates/actor.hbs", "assets/logo.svg", "lang/pt-BR.json", "docs/guia-rapido-v0.9.html"];
+          const files = ["module/main.mjs", "styles/memento.css", "templates/actor.hbs", "assets/logo.svg", "lang/pt-BR.json", "docs/guia-rapido-v1.html"];
           for (const file of files) if (!fs.existsSync(file)) throw new Error("Arquivo ausente: " + file);
           fs.appendFileSync(process.env.GITHUB_ENV, "RELEASE_TAG=" + tag + "\n");
           NODE
