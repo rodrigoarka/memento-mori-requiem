@@ -1,5 +1,18 @@
 # Histórico de versões
 
+## 1.0.0 — Duas linguagens, uma Vontade
+
+- Vigília: 1d6 + Alcance contra 4 + Resistência para ações materiais incertas e relevantes.
+- Oposição Direta: um d6 por participante, maior total prevalece na ação imediata, empate mantém a situação.
+- Limiar: A Vontade continua determinística, com Ressonância em três moedas distinguíveis.
+- Interferência: dados para ações materiais e moedas para fenômenos sobrenaturais quando há gatilhos específicos.
+- Narrador define a natureza da cena por controle no painel, sem invocação livre pelos jogadores.
+- Retirada a Vantagem de Cena de 0–2 como bônus numérico extra. A ficção modifica Condições e Preparo.
+- Criados testes matemáticos de resolução e guia rápido 1.0.
+- Manual Básico 1.0 e Relatório de Balanceamento 1.0 distribuídos separadamente nesta etapa editorial.
+- Compatibilidade declarada com Foundry v13.348–14; validação interativa em instalação real ainda pendente.
+
+
 ## 0.9.2 — Controles visuais das fichas
 
 - Capacidades exibidas em campos numéricos circulares.
