@@ -1,6 +1,6 @@
 # Memento Mori: Réquiem — Sistema Foundry VTT
 
-**Versão do sistema: 0.9.2 — Fichas com controles visuais; Manual Básico v0.9.2 de playtest.**
+**Versão do sistema: 1.0.0 — Vigília com 1d6, oposição com dois d6 e Três Vozes no Limiar; Manual Básico 1.0.**
 **Plataforma alvo: Foundry Virtual Tabletop v13.348 e v14.**
 
 ## Instalação por URL — Disponível
@@ -11,7 +11,7 @@ No Foundry VTT 13.348 ou 14, abra **Configuração → Sistemas de Jogo → Inst
 https://raw.githubusercontent.com/rodrigoarka/memento-mori-requiem/main/system.json
 ```
 
-A **Release v0.9.2** mantém as fichas leves e traz Capacidades circulares, Distância em barra e Luto em círculos pretos. [Ver releases](https://github.com/rodrigoarka/memento-mori-requiem/releases).
+A **Release v1.0.0** consolida Vigília, Limiar e Interferência e mantém as fichas leves. [Ver releases](https://github.com/rodrigoarka/memento-mori-requiem/releases).
 
 Atualizações futuras usarão o mesmo manifesto estável. As instruções de publicação estão em `PUBLICACAO.md`.
 
@@ -27,11 +27,11 @@ Alternativa para o Narrador, com o Mundo aberto: Console do Foundry → `game.me
 
 > **Importante:** o pacote não contém o aplicativo Foundry VTT, mapas comerciais nem a licença da plataforma. O código passou nos testes automatizados; ainda falta validar a experiência integral dentro de uma instalação real do Foundry.
 
-## Direção de design 0.9
+## Direção de design 1.0
 
 **A Vontade** resolve ações quando há uma resistência significativa. O jogador descreve sua intenção e abordagem antes de consultar valores. **O Reencontro** é a intenção estética: descobertas podem mudar o significado de um vínculo, uma lembrança ou uma escolha. Não é uma regra de pontos ou uma conclusão obrigatória.
 
-O painel abre **`docs/guia-rapido-v0.9.html`**, uma referência atualizada com as regras centrais. O PDF em `docs/manual-v0.8.pdf` permanece no repositório apenas como arquivo histórico. O Manual Básico 0.9.2 revisado e o caderno de aventura separado são distribuídos como documentos de playtest. Ainda precisam ser incorporados ao repositório como artefatos editoriais.
+O painel abre **`docs/guia-rapido-v1.html`**, a referência atual para Vigília, Limiar, Interferência e Oposição Direta. O PDF em `docs/manual-v0.8.pdf` permanece no repositório apenas como arquivo histórico. O Manual Básico 1.0 completo e o caderno de aventura separado são entregues como documentos editoriais independentes. Ainda precisam ser incorporados ao repositório como artefatos editoriais.
 
 *A Segunda Lembrança* é conteúdo opcional. O Limiar não está limitado à estação ou aos personagens dos exemplos.
 
@@ -60,19 +60,19 @@ Aptidão, Assinatura, Âncora, Lei, Verso, Correspondência, Condição, Vestíg
 
 ### Ferramentas
 
-- **A Vontade**: cálculo determinístico, Condição, Resistência pública, Preparo/Conhecimento, Preço anunciado.
+- **A Vontade**: determinística no Limiar, 1d6 na Vigília para ações materiais arriscadas. Oposição Direta: um d6 por lado; empate mantém a situação. Preparo, Conhecimento e Preço continuam.
 - **As Três Vozes**: três moedas independentes, oito combinações, chat público; Evocar, Conter e Sincronia após o lançamento. A Voz de Sincronia precisa ser pré-escolhida antes de ver as moedas.
 - **Luto/Ruptura/Deriva**: a terceira perda é prioritária sobre a redução da Distância; Âncora salva = Distância 4; Âncora quebrada = Luto +1, Distância 0 se não houver Deriva.
 - **Progresso**: um capítulo a cada objetivo narrativo significativo; uma Transformação a cada dois capítulos.
-- **Versos/Estrofes**: coleta de evidências e hipótese compartilhada; a revelação final da exceção da Lei é escolha do Narrador.
+- **Versos/Estrofes**: evidências independentes, hipótese e experimento. Nenhuma revelação automática.
 - **A Segunda Lembrança**: Diário de sete partes, domínio, entidade, Fissura e quatro Assinaturas de referência.
 
 ## Procedimento de mesa recomendado
 
 1. Crie a Confluência e Retornados; atribua propriedade das fichas aos jogadores.
 2. Registre três Âncoras de cada Retornado como Itens (pessoa, lugar, promessa).
-3. Para uma ação relevante, abra **A Vontade**, declare Condição, Resistência e eventual Preço.
-4. Se houver gatilho sobrenatural, abra **As Três Vozes** e lance uma vez por acontecimento.
+3. O Narrador declara a natureza da cena no Painel: Vigília, Limiar ou Interferência. Em ação relevante, abra **A Vontade**, declare Condição, Resistência e eventual Preço.
+4. Em Oposição Direta na Vigília, use **Oposição 2d6**, com um d6 para cada lado. Em Limiar ou Interferência, se houver gatilho sobrenatural, lance as Três Vozes uma vez por acontecimento.
 5. Após as moedas, decida se Evocar, Conter ou Sincronia. Para Sincronia com donos diferentes, recomenda-se o Narrador executar o lançamento: ele tem permissão para atualizar os dois Retornados.
 6. Registre Versos e evidências, descubra Leis e mantenha a trilha de Pressão/Fissura atualizada.
 7. O Narrador encerra o capítulo no **Painel Memento Mori**. Assinaturas, Confluência e recuperação ficam novamente disponíveis para o próximo capítulo.
