@@ -32,7 +32,7 @@ test('0.9: criador rápido e identidade sem logo obrigatória',()=>{
   assert.doesNotMatch(sheet,/assets\/logo\.svg/);
 });
 test('0.9: painel encaminha ao guia atual e a catarse não é obrigatória',()=>{
-  const main=read('module/main.mjs'), html=read('docs/guia-rapido-v0.9.html');
+  const main=read('module/main.mjs'), html=read('docs/guia-rapido-v1.html');
   assert.match(main,/guia-rapido-v0\.9\.html/);
   assert.match(html,/O Reencontro/);
   assert.match(html,/não é obrigatório/);
