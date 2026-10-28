@@ -1,4 +1,4 @@
-/** Regras puras e testáveis baseadas no manual Memento Mori: Réquiem v0.8. */
+/** Regras puras e testáveis alinhadas ao Manual Básico Memento Mori: Réquiem v1.0. */
 export const VOICES = ["corpo", "memoria", "veu"];
 export const LABELS = ["Silêncio", "Sussurro", "Encontro", "Convergência"];
 export const KEYS = ["lucidez", "pulso", "elo", "firmeza"];
@@ -13,6 +13,26 @@ export function resolveWill({ ability = 0, preparation = 0, knowledge = 0, resis
   if (!conditionMet) return { reach, resistance: difficulty, state: "condition", gap: null };
   const gap = difficulty - reach;
   return { reach, resistance: difficulty, gap, state: gap <= 0 ? "success" : gap === 1 ? "price" : "insufficient" };
+}
+
+
+/** 1.0 · A Vigília resolve uma ação material arriscada com um d6. */
+export function resolveVigilia({ ability=0, preparation=0, knowledge=0, resistance=1, conditionMet=true, die }) {
+  const base=resolveWill({ability,preparation,knowledge,resistance,conditionMet});
+  if (!conditionMet) return {...base, mode:'vigilia', die:null, total:null, target:4+base.resistance};
+  if (!Number.isInteger(die) || die<1 || die>6) throw new Error('O resultado do d6 deve estar entre 1 e 6.');
+  const target=4+base.resistance, total=base.reach+die, gap=target-total;
+  return {...base, mode:'vigilia', die, total, target, gap,
+    state:gap<=0?'success':gap===1?'price':'insufficient'};
+}
+/** 1.0 · Oposição: cada participante lança SEU d6; empate preserva o estado. */
+export function resolveOpposition({ reachA=0, reachB=0, dieA, dieB }) {
+  if (![dieA,dieB].every(d=>Number.isInteger(d) && d>=1 && d<=6)) throw new Error('Cada lado precisa lançar um d6 entre 1 e 6.');
+  const a=clamp(reachA,0,4),b=clamp(reachB,0,4);
+  const totalA=a+dieA,totalB=b+dieB,difference=totalA-totalB;
+  return {reachA:a,reachB:b,dieA,dieB,totalA,totalB,difference,
+    state:difference>0?'A':difference<0?'B':'tie',
+    pricePossibleForA:difference===-1, pricePossibleForB:difference===1};
 }
 
 export function resolveVoices(faces) {
