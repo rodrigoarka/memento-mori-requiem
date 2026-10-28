@@ -1,4 +1,4 @@
-import { resolveWill, tossVoices, flipVoice, resolveVoices, allowInvoke, allowContain, allowSync, VOICES } from './rules.mjs';
+import { resolveWill, resolveVigilia, resolveOpposition, tossVoices, flipVoice, resolveVoices, allowInvoke, allowContain, allowSync, VOICES } from './rules.mjs';
 import { SYS, escapeHTML as h, note, chapter, scene, own, activeAnchors, availableAnchors, selectOne, promptText, updateDistance, changePressure, notification } from './services.mjs';
 const Dialog=()=>foundry.applications.api.DialogV2;
 const options = (actors, selected = '', nullable = false) => `${nullable?'<option value="">— Nenhum —</option>':''}${actors.map(a=>`<option value="${h(a.id)}" ${a.id===selected?'selected':''}>${h(a.name)}</option>`).join('')}`;
@@ -25,13 +25,23 @@ export async function dialogWill(defaultActor=null) {
   if(!result || !result.intent.trim())return;
   const actor=game.actors.get(result.actorId); if(!actor || !own(actor))return;
   const value=actor.system.abilities[result.ability];
-  const outcome=resolveWill({ability:value,preparation:result.preparation,knowledge:result.knowledge,resistance:result.resistance,conditionMet:result.conditionMet});
+  const nature=game.settings.get(SYS,'sceneNature')||'vigilia';
+  const material=nature==='vigilia'||nature==='interferencia';
+  const die=material&&result.conditionMet?Math.floor(Math.random()*6)+1:null;
+  const props={ability:value,preparation:result.preparation,knowledge:result.knowledge,resistance:result.resistance,conditionMet:result.conditionMet};
+  const outcome=material?resolveVigilia({...props,die}):resolveWill(props);
   const state={success:'A intenção é alcançada.',price:'Pode aceitar o Preço anunciado ou mudar de abordagem.',insufficient:'A abordagem exige recurso, rota ou Lei adicional.',condition:'A Condição deve ser satisfeita primeiro.'}[outcome.state];
   const price=outcome.state==='price'?`<p><b>Preço declarado:</b> ${h(result.price||'O Narrador precisa anunciar um Preço concreto antes da escolha.')}</p>`:'';
-  await note('A VONTADE',`<p><b>${h(actor.name)}</b> · ${h(result.intent)}</p><p>${h(result.ability)} ${value} + preparo ${result.preparation?1:0} + conhecimento ${result.knowledge?1:0} = <strong>${outcome.reach}</strong> vs Resistência <b>${outcome.resistance}</b>.</p><p>${h(state)}</p>${price}`,actor,{type:'will',outcome});
+  const diceHTML=material&&die!==null?'<p><b>Vigília/Interferência material:</b> d6 '+die+' + Alcance '+outcome.reach+' = '+outcome.total+' contra alvo '+outcome.target+'.</p>'
+    :'<p><b>Limiar · Vontade:</b> Alcance '+outcome.reach+' contra Resistência '+outcome.resistance+'.</p>';
+  await note('A VONTADE','<p><b>'+h(actor.name)+'</b> · '+h(result.intent)+'</p>'
+    +'<p>'+h(result.ability)+' '+value+' + Preparo '+(result.preparation?1:0)+' + Conhecimento '+(result.knowledge?1:0)
+    +' = <strong>'+outcome.reach+'</strong> de Alcance.</p>'+diceHTML+'<p>'+h(state)+'</p>'+price,
+    actor,{type:'will',nature,outcome});
 }
 
 export async function dialogResonance(defaultActor=null) {
+  if((game.settings.get(SYS,'sceneNature')||'vigilia')==='vigilia')return notification('O Narrador precisa anunciar Limiar ou Interferência antes de uma Ressonância.');
   const chars=game.actors.filter(a=>a.type==='retornado'&&(game.user.isGM||a.isOwner));
   const threats=game.actors.filter(a=>['entidade','dominio'].includes(a.type) && (game.user.isGM||a.isOwner));
   const groups=game.actors.filter(a=>a.type==='confluencia' && (game.user.isGM||a.isOwner));
