@@ -61,7 +61,7 @@ test('Foundry 13.348: inicializa modelos, fichas, configurações e painel', asy
   assert.equal(mock.registeredSheets[0][0], foundry.documents.Actor);
   assert.equal(mock.registeredSheets[1][0], foundry.documents.Item);
   assert.equal(mock.registeredSheets[0][3].makeDefault, true);
-  assert.equal(mock.registrations.length, 2);
+  assert.equal(mock.registrations.length, 3);
   assert.equal(mock.menu.length, 1);
   assert.deepEqual(mock.templateLoads, ['systems/memento-mori-requiem/templates/pressure.hbs']);
   assert.equal(CONFIG.Actor.dataModels.retornado.defineSchema().distance.options.max, 6);
@@ -71,7 +71,7 @@ test('Foundry 13.348: inicializa modelos, fichas, configurações e painel', asy
   assert.equal(typeof game.memento.voices, 'function');
 });
 
-test('manifesto instala a versão 0.9.2 no Foundry 13.348 a 14', () => {
+test('manifesto instala a versão 1.0.0 no Foundry 13.348 a 14', () => {
   const manifest = JSON.parse(fs.readFileSync(new URL('../system.json', import.meta.url), 'utf8'));
   const pkg = JSON.parse(fs.readFileSync(new URL('../package.json', import.meta.url), 'utf8'));
   assert.equal(manifest.compatibility.minimum, '13.348');
