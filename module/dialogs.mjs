@@ -119,3 +119,55 @@ export async function sharedTrail(group) {
   await group.update({'system.usedChapter':chapter(),'system.lastTrail':details});
   await note('RASTRO COMPARTILHADO',`<p><b>${h(group.name)} · ${h(group.system.commonVerse)}</b></p><p><b>Observações:</b> ${h(details)}</p><p><b>Vestígio:</b> ${h(clue)}</p>`,group);
 }
+
+
+/** 1.0 · Um d6 por participante. Oposição sem bônus automático de defesa. */
+export async function dialogOpposition(defaultActor=null) {
+  const nature=game.settings.get(SYS,'sceneNature')||'vigilia';
+  if(nature==='limiar')return notification('No Limiar puro, compare Alcances. Para disputa material com dados, o Narrador precisa anunciar Interferência.');
+  const actors=game.actors.filter(a=>a.type==='retornado'&&(game.user.isGM||a.isOwner));
+  const defenders=game.actors.filter(a=>a.type==='retornado');
+  if(!actors.length)return notification('Crie ou obtenha permissão de um Retornado.');
+  const ability='<option value="pulso">Pulso</option><option value="lucidez">Lucidez</option><option value="elo">Elo</option><option value="firmeza">Firmeza</option>';
+  const content='<p>Disputa material: um d6 para cada lado. Empate preserva a situação. Entre protagonistas, confirme acordo dos envolvidos.</p>'
+    +'<div class="mm-dialog-grid">'
+    +'<label>Quem tenta agir<select name="actorId">'+options(actors,defaultActor?.id||'')+'</select></label>'
+    +'<label>Capacidade de quem age<select name="ability">'+ability+'</select></label>'
+    +'<label>Quem resiste (opcional para NPC)<select name="defenderId">'+options(defenders,'',true)+'</select></label>'
+    +'<label>Capacidade de quem resiste<select name="defenseAbility">'+ability+'</select></label>'
+    +'<label>Alcance de NPC sem ficha (0 a 4)<input type="number" name="npcReach" min="0" max="4" value="1"></label>'
+    +'<label>Intenções incompatíveis<input name="intent" required placeholder="Segurar, escapar, proteger..."></label>'
+    +'<label><input type="checkbox" name="prepA">Preparo de quem age +1</label>'
+    +'<label><input type="checkbox" name="knowledgeA">Conhecimento de quem age +1</label>'
+    +'<label><input type="checkbox" name="prepB">Preparo de quem resiste +1</label>'
+    +'<label><input type="checkbox" name="knowledgeB">Conhecimento de quem resiste +1</label>'
+    +'<label><input type="checkbox" name="agreed">Os envolvidos concordam com a resolução</label></div>';
+  const data=await Dialog().prompt({window:{title:'Oposição Direta · 2d6'},content,
+    ok:{label:'Lançar 1d6 para cada lado',callback:(_e,b)=>{
+      const f=b.form.elements;return {
+        actorId:f.actorId.value,ability:f.ability.value,defenderId:f.defenderId.value,
+        defenseAbility:f.defenseAbility.value,npcReach:Number(f.npcReach.value),
+        intent:f.intent.value,prepA:f.prepA.checked,knowledgeA:f.knowledgeA.checked,
+        prepB:f.prepB.checked,knowledgeB:f.knowledgeB.checked,agreed:f.agreed.checked};
+    }},rejectClose:false});
+  if(!data||!data.intent.trim())return;
+  if(!data.agreed)return notification('O Narrador precisa confirmar a concordância dos envolvidos.');
+  const actor=game.actors.get(data.actorId),defender=game.actors.get(data.defenderId);
+  if(!actor||!own(actor))return;
+  if(defender?.id===actor.id)return notification('Escolha dois personagens diferentes.');
+  const reachA=resolveWill({ability:actor.system.abilities[data.ability],preparation:data.prepA,knowledge:data.knowledgeA}).reach;
+  const reachB=defender?resolveWill({ability:defender.system.abilities[data.defenseAbility],preparation:data.prepB,knowledge:data.knowledgeB}).reach:Math.max(0,Math.min(4,data.npcReach));
+  const dieA=Math.floor(Math.random()*6)+1,dieB=Math.floor(Math.random()*6)+1;
+  const outcome=resolveOpposition({reachA,reachB,dieA,dieB});
+  const nameB=defender?.name||'Oposição do Narrador';
+  const verdict=outcome.state==='A'?actor.name+' prevalece nesta ação.'
+    :outcome.state==='B'?nameB+' prevalece nesta ação.'
+    :'Empate. A situação permanece como estava.';
+  const noteBody='<p><strong>'+h(data.intent)+'</strong></p>'
+    +'<p><b>'+h(actor.name)+'</b>: Alcance '+reachA+' + d6 '+dieA+' = '+outcome.totalA+'</p>'
+    +'<p><b>'+h(nameB)+'</b>: Alcance '+reachB+' + d6 '+dieB+' = '+outcome.totalB+'</p>'
+    +'<p><strong>'+h(verdict)+'</strong></p>'
+    +(Math.abs(outcome.difference)===1?'<p>Margem de 1: um Preço pode ser proposto. Entre jogadores, somente com acordo.</p>':'');
+  await note('OPOSIÇÃO DIRETA',noteBody,actor,{type:'opposition',nature,outcome});
+  return outcome;
+}
